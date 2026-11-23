@@ -1,0 +1,344 @@
+/* ============================================================
+   诊断域页面样式
+   通用样式（card / cell / tag / badge / btn / progress / kv / dose
+   / cal / receipt / timeline / chips / note-bar）全部来自 app.wxss
+   这里只补本页独有的结构
+   ============================================================ */
+
+/* ---------- 部位选择（P10） ---------- */
+.parts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.part {
+  width: 48%;
+  margin: 0 4% 10px 0;
+  padding: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.part:nth-child(2n) {
+  margin-right: 0;
+}
+.part-on {
+  border: 1.5px solid #0E7C86;
+}
+.part-icon {
+  font-size: 24px;
+  line-height: 1.4;
+}
+.part-name {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* ---------- 相机取景（P11） ---------- */
+.cam {
+  background: #0d1215;
+  min-height: 100vh;
+  padding: 12px 16px 20px;
+  box-sizing: border-box;
+}
+.vf {
+  position: relative;
+  width: 100%;
+  height: 390px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;
+}
+.vf-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 32% 38%, #6c8a8d, #3d5a5d 45%, #22383a);
+}
+.vf-frame {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 22%;
+  bottom: 30%;
+  border: 2px dashed rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+}
+.vf-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #2BA471;
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.vf-hint {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 9px 12px;
+  border-radius: 8px;
+}
+.vf-hint .hl {
+  color: #FFD08A;
+  font-weight: 700;
+}
+.shots {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+}
+.shot {
+  flex: 1;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 11px;
+  color: #4b6165;
+  border: 1px dashed #3a5054;
+  border-radius: 10px;
+  margin-right: 8px;
+}
+.shot:last-child {
+  margin-right: 0;
+}
+.shot-on {
+  background: #1c282b;
+  border: 1px solid #2c3d41;
+  color: #7fd1d9;
+}
+.cam-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 22px;
+}
+.cam-txt {
+  color: #8b9a9d;
+  font-size: 14px;
+}
+.cam-txt.on {
+  color: #7fd1d9;
+}
+.shutter {
+  width: 68px;
+  height: 68px;
+  border-radius: 34px;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shutter-in {
+  width: 54px;
+  height: 54px;
+  border-radius: 27px;
+  background: #fff;
+}
+
+/* ---------- 结果态头部（P12 / P23） ---------- */
+.center-head {
+  padding: 30px 20px 0;
+  text-align: center;
+}
+.round {
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  line-height: 72px;
+  font-size: 32px;
+  margin: 0 auto;
+  text-align: center;
+}
+.round-err {
+  background: #FFF0ED;
+  color: #D54941;
+}
+.round-warn {
+  background: #FFF8E6;
+  font-size: 30px;
+}
+.head-t {
+  font-size: 19px;
+  margin-top: 16px;
+}
+.head-s {
+  margin-top: 8px;
+}
+.blur-box {
+  height: 160px;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #4a5f61, #2c3c3e);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 160px;
+}
+
+/* ---------- 诊断详情（P30） ---------- */
+.lesion-fish {
+  position: absolute;
+  left: 24%;
+  top: 34%;
+  width: 52%;
+  height: 38%;
+  border-radius: 50% 45% 45% 50%;
+  background: radial-gradient(circle, #C2544A, #8FB0B3);
+  opacity: 0.9;
+}
+.thumb-muted {
+  opacity: 0.45;
+}
+.muted-t {
+  color: rgba(0, 0, 0, 0.4);
+}
+.conf {
+  width: 56px;
+  margin-left: 6px;
+}
+.bar.muted {
+  background: #D5D5D5;
+}
+.reason {
+  display: block;
+}
+.reason-i {
+  margin-right: 4px;
+}
+.txt-ok {
+  color: #2BA471;
+}
+.txt-bad {
+  color: #D54941;
+}
+.card-hi {
+  border: 1px solid #0E7C86;
+}
+.quote {
+  background: #FAFAFA;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 相似病例（P31） ---------- */
+.card-hero {
+  background: linear-gradient(135deg, #0E7C86, #0A5F66);
+  color: #fff;
+}
+.hero-sub {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.hero-num {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+.hero-num2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.hero-rate {
+  font-size: 34px;
+  font-weight: 800;
+  opacity: 0.35;
+}
+.hero-days {
+  text-align: right;
+}
+.hero-days .n {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+}
+.hero-days .u {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* ---------- 补证据（P22） ---------- */
+.gain {
+  color: #2BA471;
+  font-weight: 700;
+}
+
+/* ---------- 方案页（P40） ---------- */
+.tabs {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #E7E7E7;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 13px 0;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.4);
+}
+.tab-item.on {
+  color: #0E7C86;
+  font-weight: 600;
+  border-bottom: 2px solid #0E7C86;
+}
+
+/* ---------- 日历（P43） ---------- */
+.legend .li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.dot-mk {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: #0E7C86;
+  margin-right: 5px;
+}
+.dot-hollow {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1.5px solid #0E7C86;
+  margin-right: 5px;
+}
+
+/* ---------- 用药单（P44） ---------- */
+.qr-tip {
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+}
+
+/* ---------- 通用小工具 ---------- */
+.strong {
+  font-weight: 700;
+}
+.f1 {
+  flex: 1;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.emo {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.kv.last {
+  border-bottom: none;
+}

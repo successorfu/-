@@ -1,0 +1,93 @@
+<view class="screen">
+
+  <!-- 骨架屏：loading 时不白屏 -->
+  <block wx:if="{{loading}}">
+    <view class="hero">
+      <view class="between">
+        <view>
+          <view style="width:120px;height:12px;background:rgba(255,255,255,0.25);border-radius:6px;"></view>
+          <view style="width:150px;height:20px;background:rgba(255,255,255,0.3);border-radius:6px;margin-top:10px;"></view>
+          <view style="width:220px;height:12px;background:rgba(255,255,255,0.2);border-radius:6px;margin-top:10px;"></view>
+        </view>
+        <view class="ring"><view class="val" style="opacity:0.3;">—</view></view>
+      </view>
+    </view>
+    <view class="pad">
+      <view class="card" style="height:120px;"></view>
+      <view class="card" style="height:80px;"></view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <!-- 头部：数据全部来自 vm -->
+    <view class="hero">
+      <view class="between">
+        <view>
+          <view class="pond">📍 {{vm.county}}</view>
+          <view class="name">{{vm.pondName}}</view>
+          <view class="meta">{{vm.pondMeta}}</view>
+        </view>
+        <view class="ring">
+          <view class="val">{{vm.metricValue}}</view>
+          <view class="unit">{{vm.metricLabel}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="pad">
+      <!-- 待办：wx:for 驱动，加一条只改 mock -->
+      <view class="card">
+        <view class="between">
+          <view class="t1">今日待办</view>
+          <view class="t3">{{vm.todoCount}} 项</view>
+        </view>
+        <p-cell
+          wx:for="{{vm.todos}}"
+          wx:key="id"
+          icon="{{item.icon}}"
+          title="{{item.title}}"
+          sub="{{item.sub}}"
+          tag-type="{{item.tagType}}"
+          tag-text="{{item.tagText}}"
+          item-id="{{item.to}}"
+          last="{{index === vm.todos.length - 1}}"
+          bind:celltap="onCellTap"
+        />
+      </view>
+
+      <view class="card" style="padding:12px 16px;">
+        <view class="note-bar">⚠️ {{vm.notice}}</view>
+      </view>
+
+      <view class="card">
+        <view class="between">
+          <view class="t1" style="font-size:14px;">最近病例</view>
+          <view class="t3">全部 ›</view>
+        </view>
+        <p-cell
+          wx:for="{{vm.cases}}"
+          wx:key="id"
+          icon="{{item.icon}}"
+          title="{{item.name}}"
+          sub="{{item.sub}}"
+          tag-type="{{item.tagType}}"
+          tag-text="{{item.tagText}}"
+          item-id="case"
+          arrow="{{true}}"
+          last="{{index === vm.cases.length - 1}}"
+          bind:celltap="onCellTap"
+        />
+      </view>
+
+      <view class="mt16">
+        <view class="btn primary lg" bindtap="goCapture">📷 拍照诊断</view>
+      </view>
+
+      <view class="t3" style="text-align:center;margin-top:16px;" bindtap="goPrototype">
+        查看 34 屏全量原型 ›
+      </view>
+      <view style="height:16px;"></view>
+    </view>
+  </block>
+
+</view>

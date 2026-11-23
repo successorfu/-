@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "p-cell": "/components/p-cell/p-cell"
+  },
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true
+}

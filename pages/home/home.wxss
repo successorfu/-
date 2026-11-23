@@ -1,0 +1,15 @@
+/* 首页自身只补少量页面级样式，通用组件样式在 app.wxss */
+
+.screen {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 骨架屏呼吸感 */
+.card {
+  animation: fade 0.3s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
