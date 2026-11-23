@@ -15,22 +15,24 @@
 .part {
   width: 48%;
   margin: 0 4% 10px 0;
-  padding: 14px;
+  padding: 15px 14px;
   text-align: center;
   box-sizing: border-box;
+  border: 1.5px solid transparent;
+  transition: border-color 0.15s ease;
 }
 .part:nth-child(2n) {
   margin-right: 0;
 }
 .part-on {
-  border: 1.5px solid #0E7C86;
+  border: 1.5px solid var(--brand);
 }
 .part-icon {
   font-size: 24px;
   line-height: 1.4;
 }
 .part-name {
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 6px;
 }
 
@@ -45,7 +47,7 @@
   position: relative;
   width: 100%;
   height: 390px;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   background: #111;
 }
@@ -64,17 +66,17 @@
   top: 22%;
   bottom: 30%;
   border: 2px dashed rgba(255, 255, 255, 0.75);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 .vf-badge {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: #2BA471;
+  background: #1D9A6C;
   color: #fff;
   font-size: 11px;
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: 999px;
 }
 .vf-hint {
   position: absolute;
@@ -83,10 +85,10 @@
   bottom: 12px;
   background: rgba(0, 0, 0, 0.62);
   color: #fff;
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 9px 12px;
-  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  padding: 10px 12px;
+  border-radius: 10px;
 }
 .vf-hint .hl {
   color: #FFD08A;
@@ -105,7 +107,7 @@
   font-size: 11px;
   color: #4b6165;
   border: 1px dashed #3a5054;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-right: 8px;
 }
 .shot:last-child {
@@ -133,7 +135,7 @@
 .shutter {
   width: 68px;
   height: 68px;
-  border-radius: 34px;
+  border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.85);
   display: flex;
   align-items: center;
@@ -142,7 +144,7 @@
 .shutter-in {
   width: 54px;
   height: 54px;
-  border-radius: 27px;
+  border-radius: 50%;
   background: #fff;
 }
 
@@ -154,18 +156,18 @@
 .round {
   width: 72px;
   height: 72px;
-  border-radius: 36px;
+  border-radius: 50%;
   line-height: 72px;
   font-size: 32px;
   margin: 0 auto;
   text-align: center;
 }
 .round-err {
-  background: #FFF0ED;
-  color: #D54941;
+  background: var(--error-50);
+  color: var(--error);
 }
 .round-warn {
-  background: #FFF8E6;
+  background: #FFF3D9;
   font-size: 30px;
 }
 .head-t {
@@ -177,7 +179,7 @@
 }
 .blur-box {
   height: 160px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: linear-gradient(160deg, #4a5f61, #2c3c3e);
   color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
@@ -194,21 +196,22 @@
   width: 52%;
   height: 38%;
   border-radius: 50% 45% 45% 50%;
-  background: radial-gradient(circle, #C2544A, #8FB0B3);
+  background: radial-gradient(circle, #C9705F, #8AA6A7 72%);
   opacity: 0.9;
 }
 .thumb-muted {
-  opacity: 0.45;
+  opacity: 0.4;
 }
 .muted-t {
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--ink-3);
 }
 .conf {
   width: 56px;
   margin-left: 6px;
+  flex: none;
 }
 .bar.muted {
-  background: #D5D5D5;
+  background: #D3DDDC;
 }
 .reason {
   display: block;
@@ -217,84 +220,87 @@
   margin-right: 4px;
 }
 .txt-ok {
-  color: #2BA471;
+  color: var(--success);
 }
 .txt-bad {
-  color: #D54941;
+  color: var(--error);
 }
 .card-hi {
-  border: 1px solid #0E7C86;
+  border: 1.5px solid var(--brand);
 }
 .quote {
-  background: #FAFAFA;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 13px;
+  background: #F5F8F7;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 13.5px;
   line-height: 1.9;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--ink-2);
 }
 
 /* ---------- 相似病例（P31） ---------- */
 .card-hero {
-  background: linear-gradient(135deg, #0E7C86, #0A5F66);
+  background: linear-gradient(168deg, #0D8189 0%, #0B6E75 46%, #07585E 100%);
   color: #fff;
 }
 .hero-sub {
   font-size: 12px;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.8);
 }
 .hero-num {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
   margin-top: 6px;
+  letter-spacing: -0.3px;
 }
 .hero-num2 {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 6px;
 }
 .hero-rate {
   font-size: 34px;
-  font-weight: 800;
-  opacity: 0.35;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  font-variant-numeric: tabular-nums;
 }
 .hero-days {
   text-align: right;
 }
 .hero-days .n {
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .hero-days .u {
   font-size: 11px;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ---------- 补证据（P22） ---------- */
 .gain {
-  color: #2BA471;
-  font-weight: 700;
+  color: var(--success);
+  font-weight: 600;
 }
 
 /* ---------- 方案页（P40） ---------- */
 .tabs {
-  background: #fff;
+  background: var(--surface);
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid var(--line);
 }
 .tab-item {
   flex: 1;
   text-align: center;
-  padding: 13px 0;
+  padding: 14px 0;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--ink-3);
 }
 .tab-item.on {
-  color: #0E7C86;
+  color: var(--brand);
   font-weight: 600;
-  border-bottom: 2px solid #0E7C86;
+  border-bottom: 2px solid var(--brand);
 }
 
 /* ---------- 日历（P43） ---------- */
@@ -307,27 +313,27 @@
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  background: #0E7C86;
+  background: var(--brand);
   margin-right: 5px;
 }
 .dot-hollow {
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  border: 1.5px solid #0E7C86;
+  border: 1.5px solid var(--brand);
   margin-right: 5px;
 }
 
 /* ---------- 用药单（P44） ---------- */
 .qr-tip {
   text-align: center;
-  font-size: 10px;
-  color: #999;
+  font-size: 10.5px;
+  color: var(--ink-3);
 }
 
 /* ---------- 通用小工具 ---------- */
 .strong {
-  font-weight: 700;
+  font-weight: 600;
 }
 .f1 {
   flex: 1;

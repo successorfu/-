@@ -2,9 +2,10 @@
 
 ## 怎么打开
 
-1. 微信开发者工具 → 导入项目 → 目录选本文件夹
-2. AppID 用「测试号」或游客模式（`project.config.json` 已填 `touristappid`）
-3. 编译。**入口页是 `pages/home/home`（MVVM 版首页）**
+1. 双击 `打开开发者工具.bat`：自动按脚本所在目录导入（克隆到任何路径都能用）；找不到 CLI 时把开发者工具的 `cli.bat` 拖到它上面即可
+2. 或者：微信开发者工具 → 导入项目 → 目录选本文件夹
+3. AppID 用「测试号」或游客模式（`project.config.json` 已填 `touristappid`）
+4. 编译。**入口页是 `pages/home/home`（MVVM 版首页）**
 
 零注册、零服务器、零 npm 依赖。
 
