@@ -1,0 +1,4 @@
+/* 样式全部来自 app.wxss（styleIsolation: apply-shared），此处只做组件级微调 */
+.cell:active {
+  background: #FAFAFA;
+}

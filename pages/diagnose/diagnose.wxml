@@ -1,0 +1,620 @@
+<view class="screen">
+
+<!-- ================= P10 诊断入口 ================= -->
+<block wx:if="{{step === 'P10'}}">
+  <view class="pad">
+    <view class="t1">1. 选塘口</view>
+    <view class="chips mt12">
+      <view
+        wx:for="{{start.ponds}}"
+        wx:key="id"
+        class="chip {{item.selected ? 'on' : ''}}"
+        bindtap="pickPond"
+        data-id="{{item.id}}"
+      >{{item.name}}</view>
+      <view class="chip">+ 新增</view>
+    </view>
+
+    <view class="t1 mt20">2. 拍哪几个部位</view>
+    <view class="t3 mt8">建议至少拍 2 个。部位越对口，判得越准。</view>
+
+    <view class="parts">
+      <view
+        wx:for="{{start.parts}}"
+        wx:key="key"
+        class="card part {{index === 0 ? 'part-on' : ''}}"
+        bindtap="goStep"
+        data-step="P11"
+      >
+        <view class="part-icon">{{item.icon}}</view>
+        <view class="t1 part-name">{{item.name}}</view>
+        <view class="t3">{{item.desc}}</view>
+        <view class="mt8"><view class="tag {{item.tagType}}">{{item.tagText}}</view></view>
+      </view>
+    </view>
+
+    <view class="note-bar mt8">📐 有条件的话放一枚硬币在鱼旁边当比例尺，体重估算会准很多，剂量也跟着准。</view>
+
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="goStep" data-step="P11">开始拍摄</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P11 相机取景 ================= -->
+<block wx:if="{{step === 'P11'}}">
+  <view class="cam">
+    <view class="vf">
+      <view class="vf-bg"></view>
+      <view class="vf-frame"></view>
+      <view class="vf-badge">● 清晰度 良好</view>
+      <view class="vf-hint">
+        <text class="hl">就快了</text>　再靠近 10 厘米，让鳃丝占满虚线框
+      </view>
+    </view>
+
+    <view class="shots">
+      <view class="shot shot-on">✓ 体表</view>
+      <view class="shot">鳃丝</view>
+      <view class="shot">肛门</view>
+      <view class="shot">鳍</view>
+    </view>
+
+    <view class="cam-bar">
+      <view class="cam-txt">相册</view>
+      <view class="shutter" bindtap="goStep" data-step="P12">
+        <view class="shutter-in"></view>
+      </view>
+      <view class="cam-txt on" bindtap="goStep" data-step="P13">跳过</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P12 质检打回 ================= -->
+<block wx:if="{{step === 'P12'}}">
+  <view class="center-head">
+    <view class="round round-err">!</view>
+    <view class="t1 head-t">这张不能用</view>
+    <view class="t2 head-s">AI 没看清，诊断出来也是猜的。重拍一张，比硬给个结果更有用。</view>
+  </view>
+  <view class="pad">
+    <view class="card" style="padding:12px;">
+      <view class="blur-box">画面模糊 · 无法识别</view>
+      <view class="mt12">
+        <view class="tag error">模糊</view>
+        <view class="tag warning">主体占比不足</view>
+        <view class="tag warning">部位不符</view>
+      </view>
+    </view>
+    <view class="note-bar mt12">👉 手抖了，靠稳再拍。把手机靠在鱼盆边缘，或者让旁边人帮忙扶着鱼。</view>
+    <view class="mt20">
+      <view class="btn primary lg" bindtap="goStep" data-step="P11">重新拍鳃丝</view>
+      <view class="btn secondary" bindtap="goStep" data-step="P10">换拍其他部位</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P13">就这样用（结果按低置信度标注）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P13 症状勾选 ================= -->
+<block wx:if="{{step === 'P13'}}">
+  <view class="pad">
+    <view class="t1">哪些看着不对劲？</view>
+    <view class="t3 mt8">勾选越快，判断越准。全都不选也能出结果，只是置信度会低一些。</view>
+
+    <view class="card mt12" wx:for="{{symptom.groups}}" wx:for-item="g" wx:for-index="gi" wx:key="key">
+      <view class="t1" style="font-size:14px;">{{g.title}}</view>
+      <view class="chips mt12">
+        <view
+          wx:for="{{g.items}}"
+          wx:for-item="it"
+          wx:for-index="ii"
+          wx:key="text"
+          class="chip {{it.on ? 'on' : ''}}"
+          bindtap="toggleSymptom"
+          data-gi="{{gi}}"
+          data-ii="{{ii}}"
+        >{{it.text}}</view>
+      </view>
+    </view>
+
+    <view class="t3 mt12">已选 {{symptom.selectedCount}} 项</view>
+    <view class="mt12">
+      <view class="btn primary lg" bindtap="goStep" data-step="P14">下一步</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P20">跳过，直接诊断 →</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P14 环境快录 ================= -->
+<block wx:if="{{step === 'P14'}}">
+  <view class="pad">
+    <view class="t1">顺手填两个数</view>
+    <view class="t3 mt8">很多“鱼病”其实是水质问题。填了这几项，能先帮你排除掉环境因素。</view>
+
+    <view class="card mt12">
+      <view
+        wx:for="{{env.fields}}"
+        wx:key="key"
+        class="form-row {{index === env.fields.length - 1 ? 'last' : ''}}"
+      >
+        <view>{{item.label}}</view>
+        <view wx:if="{{item.filled}}">{{item.value}}</view>
+        <view wx:else class="ph">{{item.placeholder}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="t1" style="font-size:14px;">最近三天做过什么</view>
+      <view class="chips mt12">
+        <view
+          wx:for="{{env.events}}"
+          wx:key="name"
+          class="chip {{item.on ? 'on' : ''}}"
+          bindtap="toggleEvent"
+          data-i="{{index}}"
+        >{{item.name}}</view>
+      </view>
+      <view class="t3 mt12">这些会作为“干扰项”记录，后面判断疗效时要用到。</view>
+    </view>
+
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="goStep" data-step="P20">开始诊断</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P20 诊断中 ================= -->
+<block wx:if="{{step === 'P20'}}">
+  <view class="pad">
+    <view class="card">
+      <view style="text-align:center;padding:10px 0;">
+        <view class="t2">正在比对 12,480 份病例…</view>
+        <view class="progress mt12"><view class="bar" style="width:{{progress.percent}}%;"></view></view>
+      </view>
+      <view class="divider"></view>
+      <view class="timeline">
+        <view class="line"></view>
+        <view wx:for="{{progress.steps}}" wx:key="title" class="tl {{item.done ? 'done' : ''}}">
+          <view class="dot"></view>
+          <view class="t1 {{item.muted ? 'muted-t' : ''}}" style="font-size:14px;">{{item.title}}</view>
+          <view class="t3">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="note-bar mt12">⏱️ 大约还要 3 秒。弱网时最多等 15 秒，超时会先给你已知的部分结论。</view>
+    <view class="mt16">
+      <view class="btn secondary" bindtap="goStep" data-step="P21">不等了，直接看结果</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P23">看拒答示例</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P21 候选病 ================= -->
+<block wx:if="{{step === 'P21'}}">
+  <view class="pad">
+    <view class="t3">按可能性排序 · 点开看依据</view>
+    <view class="card mt12">
+      <view
+        wx:for="{{candidates.candidates}}"
+        wx:key="name"
+        class="cell {{index === candidates.candidates.length - 1 ? 'last' : ''}}"
+        bindtap="goStep"
+        data-step="P30"
+      >
+        <view class="thumb {{item.muted ? 'thumb-muted' : ''}}">{{item.icon}}</view>
+        <view class="grow">
+          <view class="t1 {{item.muted ? 'muted-t' : ''}}" style="font-size:14px;">{{item.name}}</view>
+          <view class="t3" style="margin-top:4px;">{{item.sub}}</view>
+        </view>
+        <view class="conf"><view class="num">{{item.confText}}</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+
+    <view class="card card-hi">
+      <view class="t1" style="font-size:14px;color:#0E7C86;">先别急着用药</view>
+      <view class="t2 mt8">氨氮 0.6mg/L 偏高。先把水调好，否则药用下去也难见效——这是烂鳃最常见的“治不好”原因。</view>
+      <view class="btn secondary mt12" bindtap="goStep" data-step="P40">看调水方案</view>
+    </view>
+
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="goStep" data-step="P30">看诊断详情</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P22 补证据 ================= -->
+<block wx:if="{{step === 'P22'}}">
+  <view class="pad">
+    <view class="t1" style="font-size:19px;line-height:1.5;">现在下结论还差点火候</view>
+    <view class="t2 mt8">你已经拍到鳃丝腐烂，但分不清是细菌还是寄生虫。补一项，结论会稳很多。</view>
+
+    <view class="card mt20" wx:for="{{proof.options}}" wx:key="key">
+      <view class="between">
+        <view class="t1" style="font-size:15px;">{{item.title}}</view>
+        <view class="tag {{item.costType}}">{{item.cost}}</view>
+      </view>
+      <view class="t3 mt8">{{item.desc}}</view>
+
+      <view class="mt16">
+        <view class="between t3"><view>现在</view><view>{{item.from}}%</view></view>
+        <view class="progress mt8"><view class="bar" style="width:{{item.from}}%;"></view></view>
+        <view class="between t3 mt12"><view>补测后预计</view><view class="gain">+{{item.to}}%</view></view>
+        <view class="progress mt8"><view class="bar ok" style="width:{{item.to}}%;"></view></view>
+      </view>
+
+      <block wx:if="{{item.note}}">
+        <view class="divider"></view>
+        <view class="t3">💡 {{item.note}}</view>
+      </block>
+    </view>
+
+    <view class="mt20">
+      <view class="btn primary lg" bindtap="goStep" data-step="P40">就去测 pH</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P40">跳过，按 62% 出方案（标注低置信度）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P23 拒答 ================= -->
+<block wx:if="{{step === 'P23'}}">
+  <view class="center-head">
+    <view class="round round-warn">🤔</view>
+    <view class="t1 head-t">证据不够，先不给你结论</view>
+    <view class="t2 head-s">你拍的照片只覆盖了体表，症状也对不上。与其瞎猜一个病名，不如告诉你下一步做什么。</view>
+  </view>
+  <view class="pad">
+    <view class="t1" style="font-size:14px;">三个建议，任选一个</view>
+
+    <view class="card mt12" bindtap="goStep" data-step="P10">
+      <view class="row">
+        <view class="emo">📷</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">补拍鳃丝和肛门</view>
+          <view class="t3">这是最容易漏、也最能定性的两个部位</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+
+    <view class="card" bindtap="goStep" data-step="P14">
+      <view class="row">
+        <view class="emo">🧪</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">测一下 pH / 氨氮 / 溶氧</view>
+          <view class="t3">先排除水质问题，很多“病”是水引起的</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="row">
+        <view class="emo">👨‍⚕️</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">把病历发给渔医</view>
+          <view class="t3">生成一份病历包，可直接转发微信</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+
+    <view class="note-bar mt16">ℹ️ 一个敢说“不知道”的系统，比什么都敢诊断的系统可靠。这条记录也会进你的病例库，补完证据可以接着诊。</view>
+  </view>
+</block>
+
+<!-- ================= P30 诊断详情 ================= -->
+<block wx:if="{{step === 'P30'}}">
+  <view class="pad">
+    <view class="lesion" style="height:220px;">
+      <view class="lesion-fish"></view>
+      <view wx:for="{{detail.lesions}}" wx:key="label" class="box" style="{{item.style}}">
+        <view class="lbl">{{item.label}}</view>
+      </view>
+    </view>
+    <view class="t3" style="margin-top:8px;">共 {{detail.imageCount}} 张图 · 已检出 4 处异常</view>
+
+    <view class="card mt12">
+      <view class="between"><view class="t1">可能是</view><view class="tag gray">按可能性排序</view></view>
+      <view
+        wx:for="{{detail.candidates}}"
+        wx:key="name"
+        class="cell {{index === detail.candidates.length - 1 ? 'last' : ''}}"
+      >
+        <view class="thumb {{item.muted ? 'thumb-muted' : ''}}">{{item.icon}}</view>
+        <view class="grow">
+          <view class="t1 {{item.muted ? 'muted-t' : ''}}" style="font-size:14px;">{{item.name}}</view>
+          <view class="t3" style="margin-top:4px;">{{item.sub}}</view>
+        </view>
+        <view class="conf">
+          <view class="progress"><view class="bar {{item.barClass}}" style="width:{{item.conf}}%;"></view></view>
+          <view class="t3" style="text-align:right;margin-top:4px;">{{item.confText}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">凭什么这么判断</view><view class="t3">收起 ⌃</view></view>
+      <view class="divider"></view>
+      <view wx:for="{{detail.reasons}}" wx:key="text" class="t2 reason">
+        <text class="reason-i">{{item.icon}}</text> {{item.text}}
+      </view>
+      <view class="divider"></view>
+      <view class="row" style="flex-wrap:wrap;">
+        <view class="t3" style="margin-right:6px;">依据</view>
+        <view wx:for="{{detail.evidence}}" wx:key="text" class="{{item.cls}}">{{item.text}}</view>
+      </view>
+      <view class="t3 mt8" style="color:#0E7C86;" bindtap="goStep" data-step="P32">查看原文 ›</view>
+    </view>
+
+    <view class="card card-hi">
+      <view class="between"><view class="t1" style="font-size:14px;color:#0E7C86;">再补一项，能更准</view><view class="tag brand">建议</view></view>
+      <view class="t2 mt8">测一下 pH 和氨氮，预计可信度 62% → 80%</view>
+      <view class="btn secondary mt12" bindtap="goStep" data-step="P22">去补测（约 3 分钟）</view>
+    </view>
+
+    <view class="mt12">
+      <view class="btn primary lg" bindtap="goStep" data-step="P40">查看治疗方案</view>
+    </view>
+
+    <view class="mt12">
+      <view class="btn ghost" bindtap="goStep" data-step="P31">看 {{similar.total}} 例相似病例 ›</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P31 相似病例 ================= -->
+<block wx:if="{{step === 'P31'}}">
+  <view class="pad">
+    <view class="card card-hero">
+      <view class="between">
+        <view>
+          <view class="hero-sub">和你这一塘条件接近的历史病例</view>
+          <view class="hero-num">{{similar.headline}}</view>
+        </view>
+        <view class="hero-rate">{{similar.rate}}%</view>
+      </view>
+    </view>
+
+    <view class="chips mt12">
+      <view class="chip on">全部 {{similar.total}}</view>
+      <view class="chip">有效 {{similar.effective}}</view>
+      <view class="chip">无效 2</view>
+      <view class="chip">失访 1</view>
+    </view>
+
+    <view class="card mt12" wx:for="{{similar.cases}}" wx:key="id">
+      <view class="between">
+        <view class="t1" style="font-size:14px;">案例 #{{item.id}}</view>
+        <view class="tag {{item.tagType}}">{{item.tagText}}</view>
+      </view>
+      <view class="t3 mt8">{{item.meta}}</view>
+      <view wx:if="{{item.symptom}}" class="t3 mt8">{{item.symptom}}</view>
+      <view class="divider"></view>
+      <view class="t3">{{item.plan}}</view>
+      <view class="t3 mt8 {{item.extraType === 'bad' ? 'txt-bad' : ''}}">{{item.result}}</view>
+      <view class="t3 mt8 {{item.extraType === 'ok' ? 'txt-ok' : ''}}">{{item.extra}}</view>
+    </view>
+
+    <view class="note-bar mt12">💡 把“无效”的案例也摆出来，比只给你看成功案例有用——你能看到别人是在哪一步翻车的。</view>
+    <view class="mt12">
+      <view class="btn secondary" bindtap="goStep" data-step="P30">返回诊断详情</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P32 依据原文 ================= -->
+<block wx:if="{{step === 'P32'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="row">
+        <view class="badge b1">国标</view>
+        <view class="badge b2">教材</view>
+        <view class="t3">· 2024 版</view>
+      </view>
+      <view class="t1 mt12">《水生动物疫病诊断规范》· 细菌性烂鳃病</view>
+      <view class="t3 mt8">来源：全国水产技术推广总站 · 2024 · 第 3.2 节</view>
+      <view class="divider"></view>
+      <view class="quote">
+        “病鱼鳃丝末端腐烂、缺损，附有污泥；鳃盖内表皮充血，严重时中间部分常被腐蚀成圆形或不规则的透明小窗……”
+      </view>
+      <view class="t3 mt12">适用品种：草鱼、青鱼、鳙、鲤 ｜ 适用水温：15–30℃</view>
+    </view>
+
+    <view class="card">
+      <view class="t1" style="font-size:14px;">这条依据支持了什么</view>
+      <view class="t2 mt8">✅ 支持“鳃丝腐烂 + 附泥”指向细菌性烂鳃</view>
+      <view class="t2 mt8">⚠️ 不支持的：本条没有区分细菌性与寄生虫性，所以模型无法据此排除寄生虫——这也是为什么置信度停在 62%。</view>
+    </view>
+
+    <view class="note-bar mt12">📌 每条结论都能点到具体条款。这是这套系统和“黑箱 AI”最本质的区别。</view>
+    <view class="mt12">
+      <view class="btn secondary" bindtap="goStep" data-step="P30">返回诊断详情</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P40 方案 ================= -->
+<block wx:if="{{step === 'P40'}}">
+  <view class="disclaimer">⚕️ 以下为参考方案，须经执业兽医确认后使用</view>
+  <view class="tabs">
+    <view class="tab-item on">立即处理</view>
+    <view class="tab-item">观察 24h</view>
+    <view class="tab-item">采样送检</view>
+  </view>
+
+  <view class="pad">
+    <view class="card" style="padding:14px 16px;" bindtap="goStep" data-step="P42">
+      <view class="between"><view class="t1" style="font-size:15px;">用药合规检查</view><view class="t3">实时校核 ›</view></view>
+      <view wx:for="{{plan.drugs}}" wx:key="name" class="light {{item.level}}">
+        <view class="bulb"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">{{item.name}} · {{item.verdict}}</view>
+          <view class="t3 mt8">{{item.note}}</view>
+        </view>
+        <view class="tag {{item.tagType}}">{{item.tag}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">算给你的用量</view><view class="tag gray">存塘 1800 斤</view></view>
+      <view class="dose mt12">
+        <view class="tr th"><view class="c1">项目</view><view class="c2">算法</view><view class="c3">结果</view></view>
+        <view wx:for="{{plan.doses}}" wx:key="name" class="tr">
+          <view class="c1">{{item.name}}</view>
+          <view class="c2">{{item.formula}}</view>
+          <view class="c3">{{item.value}}</view>
+        </view>
+      </view>
+      <view class="t3 mt12">⚠️ 水温低于 18℃ 时按说明书减量，本塘 26℃ 无需调整</view>
+    </view>
+
+    <view class="card card-hero" bindtap="goStep" data-step="P43">
+      <view class="between">
+        <view>
+          <view class="hero-sub">{{plan.withdraw.startText}}</view>
+          <view class="hero-num2">{{plan.withdraw.dateText}}</view>
+        </view>
+        <view class="hero-days">
+          <view class="n">{{plan.withdraw.days}}</view>
+          <view class="u">天</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="mt12">
+      <view class="btn primary lg" bindtap="goStep" data-step="P44">确认方案并生成用药单</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P41">算用量（单独计算器）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P41 计算器 ================= -->
+<block wx:if="{{step === 'P41'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="form-row"><view>水面面积</view><view>3.0 亩</view></view>
+      <view class="form-row"><view>平均水深</view><view>2.0 m</view></view>
+      <view class="form-row"><view>存塘重</view><view>1800 斤</view></view>
+      <view class="form-row last"><view>当前水温</view><view>26 ℃</view></view>
+    </view>
+
+    <view class="card mt12">
+      <view class="t1" style="font-size:14px;">计算结果</view>
+      <view class="kv"><view class="k">水体体积</view><view class="v">4000 m³</view></view>
+      <view class="kv"><view class="k">外用浓度</view><view class="v">0.3 mg/L</view></view>
+      <view class="kv"><view class="k">外用总量</view><view class="v strong" style="color:#0E7C86;font-size:16px;">1.2 kg</view></view>
+      <view class="kv"><view class="k">内服日剂量</view><view class="v">10 mg/kg 体重</view></view>
+      <view class="kv" style="border:none;"><view class="k">每日拌饵量</view><view class="v">18 g</view></view>
+    </view>
+
+    <view class="note-bar mt12">📐 公式：外用总量 = 水体体积 × 浓度 ÷ 1000；内服 = 存塘重 × 剂量 ÷ 日投饵率。水温修正按说明书系数表查。不在清单里的药，系统不给算——这是替你兜底。</view>
+    <view class="mt12">
+      <view class="btn secondary" bindtap="goStep" data-step="P40">返回方案</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P42 合规校验 ================= -->
+<block wx:if="{{step === 'P42'}}">
+  <view class="pad">
+    <view class="card" style="padding:14px 16px;">
+      <view class="between"><view class="t1" style="font-size:15px;">三项校验 · 全部通过</view><view class="tag success">可执行</view></view>
+      <view wx:for="{{compliance.checks}}" wx:key="title" class="light g">
+        <view class="bulb"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">{{item.title}}</view>
+          <view class="t3 mt8">{{item.note}}</view>
+        </view>
+        <view class="tag success">通过</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="t1" style="font-size:14px;">数据来源与版本</view>
+      <view
+        wx:for="{{compliance.sources}}"
+        wx:key="k"
+        class="kv {{index === compliance.sources.length - 1 ? 'last' : 'nl'}}"
+        style="{{index === compliance.sources.length - 1 ? 'border:none;' : ''}}"
+      >
+        <view class="k">{{item.k}}</view>
+        <view class="v">{{item.v}}</view>
+      </view>
+    </view>
+
+    <view class="note-bar mt12">🔒 清单版本是硬约束：如果系统用的版本已过期，会直接拒绝出方案，而不是“大概算一下”。算错一天休药期，可能就是整塘鱼卖不掉。</view>
+    <view class="mt12">
+      <view class="btn secondary" bindtap="goStep" data-step="P40">返回方案</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P43 出塘日历 ================= -->
+<block wx:if="{{step === 'P43'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">{{calendar.title}}</view><view class="t3">‹ ›</view></view>
+      <view class="cal mt12">
+        <view wx:for="{{calendar.weekdays}}" wx:key="*this" class="wd">{{item}}</view>
+        <view wx:for="{{calendar.cells}}" wx:key="id" class="{{item.cls}}">{{item.text}}</view>
+      </view>
+      <view class="legend" style="margin-top:14px;">
+        <view class="li"><view class="dot-mk"></view>今天（给药首日）</view>
+        <view class="li"><view class="dot-hollow"></view>12/7 可出塘</view>
+      </view>
+    </view>
+
+    <view class="card card-hero">
+      <view class="between">
+        <view>
+          <view class="hero-sub">距离安全出塘</view>
+          <view class="hero-num2">还有 {{plan.withdraw.days}} 天</view>
+        </view>
+        <view class="hero-days">🗓️</view>
+      </view>
+    </view>
+
+    <view class="note-bar mt12">⚠️ 休药期内如确需出塘，系统会弹出强提醒并记录留痕。这不是拦你，是给你留个说法。</view>
+    <view class="mt12">
+      <view class="btn secondary" bindtap="toast" data-msg="已设置提醒（提前 3 天）">设个提醒</view>
+      <view class="btn ghost" bindtap="goStep" data-step="P40">返回方案</view>
+    </view>
+  </view>
+</block>
+
+<!-- ================= P44 用药单 ================= -->
+<block wx:if="{{step === 'P44'}}">
+  <view class="pad">
+    <view class="receipt">
+      <view class="h">塘口用药单</view>
+      <view class="sub">TANGKOU MEDICATION RECORD</view>
+
+      <view wx:for="{{receipt.rows}}" wx:key="k" class="r"><view>{{item.k}}</view><view>{{item.v}}</view></view>
+      <view class="ln"></view>
+      <view wx:for="{{receipt.meds}}" wx:key="k" class="r"><view>{{item.k}}</view><view>{{item.v}}</view></view>
+      <view class="ln"></view>
+      <view wx:for="{{receipt.tail}}" wx:key="k" class="r">
+        <view class="{{item.strong ? 'strong' : ''}}">{{item.k}}</view>
+        <view class="{{item.strong ? 'strong' : ''}}">{{item.v}}</view>
+      </view>
+
+      <view class="qr" style="margin:10px auto 6px;">二维码</view>
+      <view class="qr-tip">扫码查看完整病例与回访记录</view>
+      <view class="foot">
+        本单为参考方案，不构成处方。用药须符合《兽药管理条例》及农业农村部相关规定，休药期内禁止上市销售。
+      </view>
+    </view>
+
+    <view class="mt12 row">
+      <view class="btn secondary f1 mr10" bindtap="toast" data-msg="已保存到相册">保存图片</view>
+      <view class="btn primary f1" bindtap="toast" data-msg="已复制给渔医">发给渔医</view>
+    </view>
+
+    <view class="mt12">
+      <view class="btn ghost" bindtap="goStep" data-step="P40">返回方案</view>
+    </view>
+  </view>
+</block>
+
+</view>

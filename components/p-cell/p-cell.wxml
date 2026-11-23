@@ -1,0 +1,9 @@
+<view class="cell {{last ? 'last' : ''}}" bindtap="onTap">
+  <view class="thumb">{{icon}}</view>
+  <view class="grow">
+    <view class="t1" style="font-size:14px;">{{title}}</view>
+    <view wx:if="{{sub}}" class="t3" style="margin-top:4px;">{{sub}}</view>
+  </view>
+  <view wx:if="{{tagText}}" class="tag {{tagType}}">{{tagText}}</view>
+  <view wx:if="{{arrow}}" class="arrow">›</view>
+</view>

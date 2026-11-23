@@ -1,7 +1,7 @@
 * text=auto eol=lf
 
-# Windows 批处理必须保留 CRLF
-*.bat text eol=crlf
+# Windows 批处理按二进制保存，保持 CRLF 原样（否则 clone 后中文与多行括号块容易出错）
+*.bat -text
 
 # 图片按二进制处理
 *.png binary

@@ -1,0 +1,1347 @@
+<view class="screen">
+
+<!-- ============ P00 启动 ============ -->
+<block wx:if="{{page==='P00'}}">
+  <view style="min-height:100vh;background:linear-gradient(160deg,#0E7C86,#0A5F66);padding:0 28px;display:flex;flex-direction:column;color:#fff;">
+    <view style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+      <view style="width:84px;height:84px;border-radius:22px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);text-align:center;line-height:84px;font-size:38px;">🐟</view>
+      <view style="font-size:24px;font-weight:700;margin-top:22px;letter-spacing:1px;">塘口鱼医</view>
+      <view style="font-size:13px;opacity:0.75;margin-top:8px;">拍得准 · 说得清 · 跟得到底</view>
+    </view>
+    <view style="padding-bottom:40px;">
+      <view style="font-size:11px;opacity:0.65;line-height:1.8;margin-bottom:18px;">
+        需要获取你的位置，用于县域病害预警。仅展示到县，不展示具体塘口。
+        登录后你的塘口与病例会加密保存，可随时导出或删除。
+      </view>
+      <view class="btn lg" style="background:#fff;color:#0E7C86;" bindtap="go" data-page="P01">微信一键登录</view>
+      <view class="btn ghost" style="color:rgba(255,255,255,0.7);" bindtap="go" data-page="P01">先随便看看</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P01 首页 ============ -->
+<block wx:if="{{page==='P01'}}">
+  <view class="hero">
+    <view class="between">
+      <view>
+        <view class="pond">📍 江西 · 南昌县</view>
+        <view class="name">东塘 3 号</view>
+        <view class="meta">草鱼 · 3 亩 · 水深 2.0m · ≈1800 斤</view>
+      </view>
+      <view class="ring">
+        <view class="val">14</view>
+        <view class="unit">天可出塘</view>
+      </view>
+    </view>
+  </view>
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1">今日待办</view><view class="t3">2 项</view></view>
+      <view class="cell" bindtap="go" data-page="P60">
+        <view class="thumb">⏰</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">回访打卡 · 第 3 天</view>
+          <view class="t3 mt8" style="margin-top:4px;">昨天用药，今天问一句死鱼数</view>
+        </view>
+        <view class="tag error">待填</view>
+      </view>
+      <view class="cell last" bindtap="go" data-page="P50">
+        <view class="thumb">💊</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">内服第 2/5 天</view>
+          <view class="t3 mt8" style="margin-top:4px;">氟苯尼考 · 每日 1 次 · 拌饵</view>
+        </view>
+        <view class="tag warning">进行中</view>
+      </view>
+    </view>
+    <view class="card" style="padding:12px 16px;">
+      <view class="note-bar">⚠️ 未来 48 小时降温 6℃，注意应激与缺氧，建议减料 30%。</view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">最近病例</view><view class="t3" bindtap="go" data-page="P70">全部 ›</view></view>
+      <view class="cell last" bindtap="go" data-page="P71">
+        <view class="thumb">🐟</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">细菌性烂鳃病</view>
+          <view class="t3 mt8" style="margin-top:4px;">3 天前 · 已验证有效</view>
+        </view>
+        <view class="tag success">已见效</view>
+      </view>
+    </view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P10">📷 拍照诊断</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P02 塘口列表 ============ -->
+<block wx:if="{{page==='P02'}}">
+  <view class="pad">
+    <view class="chips">
+      <view class="chip on">全部 3</view>
+      <view class="chip">养殖中 2</view>
+      <view class="chip">空塘 1</view>
+    </view>
+    <view class="card mt12">
+      <view class="cell" bindtap="go" data-page="P03">
+        <view class="thumb">🌊</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">东塘 3 号</view>
+          <view class="t3" style="margin-top:4px;">草鱼 · 3 亩 · 2.0m · 存塘 1800 斤</view>
+        </view>
+        <view class="tag warning">休药期</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P03">
+        <view class="thumb">🌊</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">西塘 1 号</view>
+          <view class="t3" style="margin-top:4px;">鲫鱼 · 2 亩 · 1.5m · 存塘 900 斤</view>
+        </view>
+        <view class="tag success">正常</view>
+      </view>
+      <view class="cell last" bindtap="go" data-page="P03">
+        <view class="thumb">🏞️</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">新开挖塘</view>
+          <view class="t3" style="margin-top:4px;">空塘 · 未投苗</view>
+        </view>
+        <view class="tag gray">空塘</view>
+      </view>
+    </view>
+    <view class="mt16">
+      <view class="btn primary" bindtap="go" data-page="P04">+ 新增塘口</view>
+    </view>
+    <view class="t3 mt16" style="text-align:center;">建档后，诊断会自动带入品种、水温、存塘量，剂量才算得准</view>
+  </view>
+</block>
+
+<!-- ============ P03 塘口详情 ============ -->
+<block wx:if="{{page==='P03'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">水质（今天 08:20）</view><view class="t3" bindtap="go" data-page="P14">去录入 ›</view></view>
+      <view style="display:flex;flex-direction:row;flex-wrap:wrap;margin-top:12px;">
+        <view style="width:48%;background:#F7FAFA;border-radius:10px;padding:12px;margin:0 4% 8px 0;">
+          <view class="t3">水温</view><view class="num" style="font-size:20px;margin-top:4px;">26.4 ℃</view>
+          <view class="tag success">适宜</view>
+        </view>
+        <view style="width:48%;background:#F7FAFA;border-radius:10px;padding:12px;margin-bottom:8px;">
+          <view class="t3">pH</view><view class="num" style="font-size:20px;margin-top:4px;">8.2</view>
+          <view class="tag success">正常</view>
+        </view>
+        <view style="width:48%;background:#FFF9F5;border-radius:10px;padding:12px;margin:0 4% 8px 0;">
+          <view class="t3">氨氮</view><view class="num" style="font-size:20px;margin-top:4px;">0.6 mg/L</view>
+          <view class="tag warning">偏高</view>
+        </view>
+        <view style="width:48%;background:#F7FAFA;border-radius:10px;padding:12px;margin-bottom:8px;">
+          <view class="t3">溶解氧</view><view class="num" style="font-size:20px;margin-top:4px;">5.8 mg/L</view>
+          <view class="tag success">正常</view>
+        </view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">存塘</view>
+      <view class="kv"><view class="k">放养尾数</view><view class="v">4,500 尾</view></view>
+      <view class="kv"><view class="k">平均规格</view><view class="v">4 两/尾</view></view>
+      <view class="kv" style="border:none;"><view class="k">估算存塘重</view><view class="v" style="color:#0E7C86;">≈ 1,800 斤</view></view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">历史病例</view><view class="t3">4 条</view></view>
+      <view class="cell" bindtap="go" data-page="P71">
+        <view class="thumb">🦠</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">细菌性烂鳃病</view><view class="t3" style="margin-top:4px;">11-20 · 有效</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">💧</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">水质突变应激</view><view class="t3" style="margin-top:4px;">11-02 · 有效</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">🐛</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">锚头鳋</view><view class="t3" style="margin-top:4px;">10-18 · 有效</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="mt12" style="display:flex;flex-direction:row;">
+      <view class="btn secondary" style="flex:1;margin-right:10px;" bindtap="go" data-page="P04">编辑塘口</view>
+      <view class="btn primary" style="flex:1;" bindtap="go" data-page="P10">拍照诊断</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P04 塘口编辑 ============ -->
+<block wx:if="{{page==='P04'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="form-row"><view>塘口名 *</view><view>东塘 3 号</view></view>
+      <view class="form-row"><view>水面面积 *</view><view>3.0 亩</view></view>
+      <view class="form-row"><view>平均水深 *</view><view>2.0 m</view></view>
+      <view class="form-row"><view>主养品种 *</view><view>草鱼 ›</view></view>
+      <view class="form-row"><view>放养尾数</view><view>4500</view></view>
+      <view class="form-row"><view>平均规格</view><view>4 两/尾</view></view>
+      <view class="form-row last"><view>位置</view><view>江西 南昌县 ›</view></view>
+    </view>
+    <view class="note-bar mt12">💡 面积与水深决定水体体积，内服剂量还要用到存塘重——这两项填准，药量才不是猜的。</view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P02">保存</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P10 诊断入口 ============ -->
+<block wx:if="{{page==='P10'}}">
+  <view class="pad">
+    <view class="t1">1. 选塘口</view>
+    <view class="chips mt12">
+      <view class="chip on">东塘 3 号</view>
+      <view class="chip">西塘 1 号</view>
+      <view class="chip" bindtap="go" data-page="P04">+ 新增</view>
+    </view>
+    <view class="t1 mt20">2. 拍哪几个部位</view>
+    <view class="t3 mt8">建议至少拍 2 个。部位越对口，判得越准。</view>
+    <view style="display:flex;flex-direction:row;flex-wrap:wrap;margin-top:12px;">
+      <view class="card" style="width:48%;margin:0 4% 10px 0;padding:14px;text-align:center;border:1.5px solid #0E7C86;" bindtap="go" data-page="P11">
+        <view style="font-size:24px;">🐟</view>
+        <view class="t1" style="font-size:14px;margin-top:6px;">体表</view>
+        <view class="t3">充血/溃烂/白点</view>
+        <view class="mt8"><view class="tag success">已拍 1 张</view></view>
+      </view>
+      <view class="card" style="width:48%;margin:0 0 10px 0;padding:14px;text-align:center;" bindtap="go" data-page="P11">
+        <view style="font-size:24px;">🫁</view>
+        <view class="t1" style="font-size:14px;margin-top:6px;">鳃丝</view>
+        <view class="t3">烂鳃/白鳃/寄生虫</view>
+        <view class="mt8"><view class="tag gray">待拍</view></view>
+      </view>
+      <view class="card" style="width:48%;margin:0 4% 10px 0;padding:14px;text-align:center;" bindtap="go" data-page="P11">
+        <view style="font-size:24px;">🕳️</view>
+        <view class="t1" style="font-size:14px;margin-top:6px;">肛门/腹部</view>
+        <view class="t3">红肿/腹水</view>
+        <view class="mt8"><view class="tag gray">待拍</view></view>
+      </view>
+      <view class="card" style="width:48%;margin:0 0 10px 0;padding:14px;text-align:center;" bindtap="go" data-page="P11">
+        <view style="font-size:24px;">🪶</view>
+        <view class="t1" style="font-size:14px;margin-top:6px;">鳍</view>
+        <view class="t3">蛀鳍/白尾</view>
+        <view class="mt8"><view class="tag gray">待拍</view></view>
+      </view>
+    </view>
+    <view class="note-bar mt8">📐 有条件的话放一枚硬币在鱼旁边当比例尺，体重估算会准很多，剂量也跟着准。</view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P11">开始拍摄</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P11 相机取景 ============ -->
+<block wx:if="{{page==='P11'}}">
+  <view style="background:#0d1215;min-height:100vh;padding:12px 16px 20px;">
+    <view style="position:relative;width:100%;height:390px;background:#111;border-radius:14px;overflow:hidden;">
+      <view style="position:absolute;left:0;right:0;top:0;bottom:0;background:radial-gradient(circle at 32% 38%,#6c8a8d,#3d5a5d 45%,#22383a);"></view>
+      <view style="position:absolute;left:14%;right:14%;top:22%;bottom:30%;border:2px dashed rgba(255,255,255,0.75);border-radius:10px;"></view>
+      <view style="position:absolute;top:12px;left:12px;background:#2BA471;color:#fff;font-size:11px;padding:4px 10px;border-radius:20px;">● 清晰度 良好</view>
+      <view style="position:absolute;left:12px;right:12px;bottom:12px;background:rgba(0,0,0,0.62);color:#fff;font-size:12px;line-height:1.5;padding:9px 12px;border-radius:8px;">
+        <text style="color:#FFD08A;font-weight:700;">就快了</text>　再靠近 10 厘米，让鳃丝占满虚线框
+      </view>
+    </view>
+    <view style="display:flex;flex-direction:row;margin-top:12px;">
+      <view style="flex:1;height:60px;border-radius:10px;background:#1c282b;border:1px solid #2c3d41;color:#7fd1d9;font-size:11px;text-align:center;line-height:60px;margin-right:8px;">✓ 体表</view>
+      <view style="flex:1;height:60px;border-radius:10px;border:1px dashed #3a5054;color:#4b6165;font-size:11px;text-align:center;line-height:60px;margin-right:8px;">鳃丝</view>
+      <view style="flex:1;height:60px;border-radius:10px;border:1px dashed #3a5054;color:#4b6165;font-size:11px;text-align:center;line-height:60px;margin-right:8px;">肛门</view>
+      <view style="flex:1;height:60px;border-radius:10px;border:1px dashed #3a5054;color:#4b6165;font-size:11px;text-align:center;line-height:60px;">鳍</view>
+    </view>
+    <view style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;margin-top:22px;">
+      <view style="color:#8b9a9d;font-size:14px;">相册</view>
+      <view bindtap="go" data-page="P12" style="width:68px;height:68px;border-radius:34px;border:3px solid rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;">
+        <view style="width:54px;height:54px;border-radius:27px;background:#fff;"></view>
+      </view>
+      <view bindtap="go" data-page="P13" style="color:#7fd1d9;font-size:14px;">跳过</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P12 质检打回 ============ -->
+<block wx:if="{{page==='P12'}}">
+  <view style="padding:28px 20px 0;text-align:center;">
+    <view style="width:72px;height:72px;border-radius:36px;background:#FFF0ED;color:#D54941;font-size:32px;line-height:72px;margin:0 auto;">!</view>
+    <view class="t1" style="font-size:19px;margin-top:16px;">这张不能用</view>
+    <view class="t2" style="margin-top:8px;">AI 没看清，诊断出来也是猜的。重拍一张，比硬给个结果更有用。</view>
+  </view>
+  <view class="pad">
+    <view class="card" style="padding:12px;">
+      <view style="height:160px;border-radius:10px;background:linear-gradient(160deg,#4a5f61,#2c3c3e);color:rgba(255,255,255,0.5);font-size:12px;text-align:center;line-height:160px;letter-spacing:2px;">画面模糊 · 无法识别</view>
+      <view class="mt12">
+        <view class="tag error">模糊</view>
+        <view class="tag warning">主体占比不足</view>
+        <view class="tag warning">部位不符</view>
+      </view>
+    </view>
+    <view class="note-bar mt12">👉 手抖了，靠稳再拍。把手机靠在鱼盆边缘，或者让旁边人帮忙扶着鱼。</view>
+    <view class="mt20">
+      <view class="btn primary lg" bindtap="go" data-page="P11">重新拍鳃丝</view>
+      <view class="btn secondary" bindtap="go" data-page="P10">换拍其他部位</view>
+      <view class="btn ghost" bindtap="go" data-page="P13">就这样用（结果按低置信度标注）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P13 症状勾选 ============ -->
+<block wx:if="{{page==='P13'}}">
+  <view class="pad">
+    <view class="t1">哪些看着不对劲？</view>
+    <view class="t3 mt8">勾选越快，判断越准。全都不选也能出结果，只是置信度会低一些。</view>
+    <view class="card mt12">
+      <view class="t1" style="font-size:14px;">🐟 体表</view>
+      <view class="chips mt12">
+        <view class="chip on">鳃盖充血</view>
+        <view class="chip">体表溃烂</view>
+        <view class="chip">白点</view>
+        <view class="chip">棉絮状附着</view>
+        <view class="chip">鳞片脱落</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">🫁 鳃</view>
+      <view class="chips mt12">
+        <view class="chip on">鳃丝腐烂</view>
+        <view class="chip on">附泥</view>
+        <view class="chip">白鳃</view>
+        <view class="chip">鳃丝肿胀</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">🏃 行为</view>
+      <view class="chips mt12">
+        <view class="chip on">浮头</view>
+        <view class="chip on">不吃食</view>
+        <view class="chip">独游</view>
+        <view class="chip">狂游打转</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">📉 死亡情况</view>
+      <view class="chips mt12">
+        <view class="chip on">每天 20–50 条</view>
+        <view class="chip">零星几条</view>
+        <view class="chip">大量急性死亡</view>
+      </view>
+    </view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P14">下一步</view>
+      <view class="btn ghost" bindtap="go" data-page="P20">跳过，直接诊断 →</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P14 环境快录 ============ -->
+<block wx:if="{{page==='P14'}}">
+  <view class="pad">
+    <view class="t1">顺手填两个数</view>
+    <view class="t3 mt8">很多“鱼病”其实是水质问题。填了这几项，能先帮你排除掉环境因素。</view>
+    <view class="card mt12">
+      <view class="form-row"><view>水温</view><view>26.4 ℃</view></view>
+      <view class="form-row"><view>pH</view><view>8.2</view></view>
+      <view class="form-row"><view>氨氮</view><view>0.6 mg/L</view></view>
+      <view class="form-row last"><view>溶解氧</view><view class="ph">未填（可跳过）</view></view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">最近三天做过什么</view>
+      <view class="chips mt12">
+        <view class="chip">换水</view>
+        <view class="chip on">施肥</view>
+        <view class="chip">杀虫</view>
+        <view class="chip">消毒</view>
+        <view class="chip">并塘</view>
+        <view class="chip">暴雨</view>
+        <view class="chip on">降温</view>
+      </view>
+      <view class="t3 mt12">这些会作为“干扰项”记录，后面判断疗效时要用到。</view>
+    </view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P20">开始诊断</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P20 诊断中 ============ -->
+<block wx:if="{{page==='P20'}}">
+  <view class="pad">
+    <view class="card">
+      <view style="text-align:center;padding:10px 0;">
+        <view class="t2">正在比对 12,480 份病例…</view>
+        <view class="progress mt12"><view class="bar" style="width:70%;"></view></view>
+      </view>
+      <view class="divider"></view>
+      <view class="timeline">
+        <view class="line"></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">照片质检</view><view class="t3">3 张合格 · 检出 4 处异常</view></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">病灶识别</view><view class="t3">鳃丝腐烂、鳃盖充血</view></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">环境因素排查</view><view class="t3">氨氮 0.6 偏高，可能是诱因</view></view>
+        <view class="tl"><view class="dot"></view><view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">比对历史病例</view><view class="t3">进行中…</view></view>
+        <view class="tl" style="padding-bottom:0;"><view class="dot"></view><view class="t1" style="font-size:14px;color:rgba(0,0,0,0.25);">生成方案</view></view>
+      </view>
+    </view>
+    <view class="note-bar mt12">⏱️ 大约还要 3 秒。弱网时最多等 15 秒，超时会先给你已知的部分结论。</view>
+    <view class="mt16">
+      <view class="btn secondary" bindtap="go" data-page="P21">直接看结果（跳过等待）</view>
+      <view class="btn ghost" bindtap="go" data-page="P23">看拒答示例</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P21 候选病列表 ============ -->
+<block wx:if="{{page==='P21'}}">
+  <view class="pad">
+    <view class="t3">按可能性排序 · 点开看依据</view>
+    <view class="card mt12">
+      <view class="cell" bindtap="go" data-page="P30">
+        <view class="thumb">🦠</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">细菌性烂鳃病</view>
+          <view class="t3" style="margin-top:4px;">鳃丝腐烂 · 附泥 · 鳃盖充血</view>
+        </view>
+        <view style="text-align:right;width:44px;"><view class="num">82%</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P30">
+        <view class="thumb">🪱</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">寄生虫性烂鳃</view>
+          <view class="t3" style="margin-top:4px;">需镜检确认，暂无法排除</view>
+        </view>
+        <view style="text-align:right;width:44px;"><view class="num">34%</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell last" bindtap="go" data-page="P30">
+        <view class="thumb" style="opacity:0.5;">🍄</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">水霉病</view>
+          <view class="t3" style="margin-top:4px;">无棉絮状菌丝，已基本排除</view>
+        </view>
+        <view style="text-align:right;width:44px;"><view class="num">8%</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="card" style="border:1px solid #0E7C86;">
+      <view class="t1" style="font-size:14px;color:#0E7C86;">先别急着用药</view>
+      <view class="t2 mt8">氨氮 0.6mg/L 偏高。先把水调好，否则药用下去也难见效——这是烂鳃最常见的“治不好”原因。</view>
+      <view class="btn secondary mt12" bindtap="go" data-page="P40">看调水方案</view>
+    </view>
+    <view class="mt16">
+      <view class="btn primary lg" bindtap="go" data-page="P30">看诊断详情</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P22 补证据 ============ -->
+<block wx:if="{{page==='P22'}}">
+  <view class="pad">
+    <view class="t1" style="font-size:19px;line-height:1.5;">现在下结论还差点火候</view>
+    <view class="t2 mt8">你已经拍到鳃丝腐烂，但分不清是细菌还是寄生虫。补一项，结论会稳很多。</view>
+    <view class="card mt20">
+      <view class="between"><view class="t1" style="font-size:15px;">测 pH 与氨氮</view><view class="tag success">3 分钟</view></view>
+      <view class="t3 mt8">用试纸或便携仪器，把读数填进来即可</view>
+      <view class="mt16">
+        <view class="between t3"><view>现在</view><view>62%</view></view>
+        <view class="progress mt8"><view class="bar" style="width:62%;"></view></view>
+        <view class="between t3 mt12"><view>补测后预计</view><view style="color:#2BA471;font-weight:700;">80%</view></view>
+        <view class="progress mt8"><view class="bar ok" style="width:80%;"></view></view>
+      </view>
+      <view class="divider"></view>
+      <view class="t3">💡 氨氮超过 0.5mg/L 时，烂鳃大概率是水质诱发的，处理方式完全不同——所以才要测。</view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">拍鳃丝压片镜检</view><view class="tag gray">15 分钟 · 需显微镜</view></view>
+      <view class="t3 mt8">能把寄生虫性烂鳃从 34% 直接定死或排除</view>
+      <view class="mt12">
+        <view class="between t3"><view>补测后预计</view><view style="color:#2BA471;font-weight:700;">91%</view></view>
+        <view class="progress mt8"><view class="bar ok" style="width:91%;"></view></view>
+      </view>
+    </view>
+    <view class="mt20">
+      <view class="btn primary lg" bindtap="go" data-page="P40">就去测 pH</view>
+      <view class="btn ghost" bindtap="go" data-page="P40">跳过，按 62% 出方案（标注低置信度）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P23 拒答页 ============ -->
+<block wx:if="{{page==='P23'}}">
+  <view style="padding:30px 20px 0;text-align:center;">
+    <view style="width:72px;height:72px;border-radius:36px;background:#FFF8E6;font-size:30px;line-height:72px;margin:0 auto;">🤔</view>
+    <view class="t1" style="font-size:19px;margin-top:16px;">证据不够，先不给你结论</view>
+    <view class="t2" style="margin-top:8px;">你拍的照片只覆盖了体表，症状也对不上。与其瞎猜一个病名，不如告诉你下一步做什么。</view>
+  </view>
+  <view class="pad">
+    <view class="t1 mt8" style="font-size:14px;">三个建议，任选一个</view>
+    <view class="card mt12" bindtap="go" data-page="P10">
+      <view class="row">
+        <view style="font-size:20px;margin-right:10px;">📷</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">补拍鳃丝和肛门</view>
+          <view class="t3">这是最容易漏、也最能定性的两个部位</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="row">
+        <view style="font-size:20px;margin-right:10px;">🧪</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">测一下 pH / 氨氮 / 溶氧</view>
+          <view class="t3">先排除水质问题，很多“病”是水引起的</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="row">
+        <view style="font-size:20px;margin-right:10px;">👨‍⚕️</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">把病历发给渔医</view>
+          <view class="t3">生成一份病历包，可直接转发微信</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="note-bar mt16">ℹ️ 一个敢说“不知道”的系统，比什么都敢诊断的系统可靠。这条记录也会进你的病例库，补完证据可以接着诊。</view>
+  </view>
+</block>
+
+<!-- ============ P30 诊断详情 ============ -->
+<block wx:if="{{page==='P30'}}">
+  <view class="pad">
+    <view class="lesion" style="height:220px;" bindtap="toast" data-msg="点亮病灶查看">
+      <view style="position:absolute;left:24%;top:34%;width:52%;height:38%;background:radial-gradient(circle,#C2544A,#8FB0B3);border-radius:50% 45% 45% 50%;opacity:0.9;"></view>
+      <view class="box" style="left:35%;top:42%;width:19%;height:19%;"><view class="lbl">鳃丝腐烂 · 92%</view></view>
+    </view>
+    <view class="t3" style="margin-top:8px;">共 3 张图 · 已检出 4 处异常</view>
+
+    <view class="card mt12">
+      <view class="between"><view class="t1">可能是</view><view class="tag gray">按可能性排序</view></view>
+      <view class="cell">
+        <view class="thumb">🦠</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">细菌性烂鳃病</view>
+          <view style="margin-top:6px;">
+            <view class="tag solid">最可能</view>
+            <view class="badge b1">国标</view>
+            <view class="badge b2">图谱</view>
+          </view>
+        </view>
+        <view style="width:56px;">
+          <view class="progress"><view class="bar" style="width:82%;"></view></view>
+          <view class="t3" style="text-align:right;margin-top:4px;">82%</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="thumb">🪱</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">寄生虫性烂鳃</view>
+          <view class="t3" style="margin-top:4px;">需镜检确认，暂无法排除</view>
+        </view>
+        <view style="width:56px;">
+          <view class="progress"><view class="bar warn" style="width:34%;"></view></view>
+          <view class="t3" style="text-align:right;margin-top:4px;">34%</view>
+        </view>
+      </view>
+      <view class="cell last">
+        <view class="thumb" style="opacity:0.5;">🍄</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">水霉病</view>
+          <view class="t3" style="margin-top:4px;">已排除</view>
+        </view>
+        <view style="width:56px;">
+          <view class="progress"><view class="bar" style="width:8%;background:#D5D5D5;"></view></view>
+          <view class="t3" style="text-align:right;margin-top:4px;">8%</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">凭什么这么判断</view><view class="t3">收起 ⌃</view></view>
+      <view class="divider"></view>
+      <view class="t2">✅ 鳃丝末端腐烂、附泥，鳃盖内表皮充血——符合细菌性烂鳃的典型表现。</view>
+      <view class="t2 mt8">❌ 不像水霉：没有棉絮状菌丝，水温 26℃ 也不利于水霉暴发。</view>
+      <view class="t2 mt8">❌ 不像寄生虫：体表未见锚头鳋，但鳃丝压片没拍，所以只降到 34% 而非排除。</view>
+      <view class="divider"></view>
+      <view class="row" style="flex-wrap:wrap;">
+        <view class="t3" style="margin-right:6px;">依据</view>
+        <view class="badge b1">国标·诊断规范</view>
+        <view class="badge b2">教材·鱼病学</view>
+        <view class="badge b4">同类病例 12 例</view>
+      </view>
+      <view class="t3 mt8" style="color:#0E7C86;" bindtap="go" data-page="P32">查看原文 ›</view>
+    </view>
+
+    <view class="card" style="border:1px solid #0E7C86;">
+      <view class="between"><view class="t1" style="font-size:14px;color:#0E7C86;">再补一项，能更准</view><view class="tag brand">建议</view></view>
+      <view class="t2 mt8">测一下 pH 和氨氮，预计可信度 62% → 80%</view>
+      <view class="btn secondary mt12" bindtap="go" data-page="P22">去补测（约 3 分钟）</view>
+    </view>
+    <view class="mt12">
+      <view class="btn primary lg" bindtap="go" data-page="P40">查看治疗方案</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P31 相似病例 ============ -->
+<block wx:if="{{page==='P31'}}">
+  <view class="pad">
+    <view class="card" style="background:linear-gradient(135deg,#0E7C86,#0A5F66);color:#fff;">
+      <view class="between">
+        <view>
+          <view style="font-size:12px;opacity:0.8;">和你这一塘条件接近的历史病例</view>
+          <view style="font-size:22px;font-weight:800;margin-top:6px;">12 例中有 9 例有效</view>
+        </view>
+        <view style="font-size:34px;font-weight:800;opacity:0.35;">75%</view>
+      </view>
+    </view>
+    <view class="chips mt12">
+      <view class="chip on">全部 12</view>
+      <view class="chip">有效 9</view>
+      <view class="chip">无效 2</view>
+      <view class="chip">失访 1</view>
+    </view>
+    <view class="card mt12">
+      <view class="between"><view class="t1" style="font-size:14px;">案例 #C-2026-0417</view><view class="tag success">有效</view></view>
+      <view class="t3 mt8">草鱼 · 3.2 亩 · 水温 26℃ · pH 8.1 · 氨氮 0.55</view>
+      <view class="t3 mt8">症状：鳃丝腐烂、附泥、浮头、日死亡 28 条</view>
+      <view class="divider"></view>
+      <view class="t3">方案：外用消毒 1 次 ＋ 内服 5 天</view>
+      <view class="t3 mt8">结果：D3 降至 12 条，D7 降至 3 条</view>
+      <view class="t3 mt8" style="color:#2BA471;">相似度 94% · 归因置信度 高</view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">案例 #C-2026-0389</view><view class="tag error">无效</view></view>
+      <view class="t3 mt8">草鱼 · 2.8 亩 · 水温 25℃ · pH 7.8 · 氨氮 0.9</view>
+      <view class="divider"></view>
+      <view class="t3">方案同上，但氨氮始终没降下来</view>
+      <view class="t3 mt8" style="color:#D54941;">D3 死亡数反而上升，后转调水才控制住</view>
+      <view class="t3 mt8">相似度 88% · 注意：该例氨氮高于本例</view>
+    </view>
+    <view class="note-bar mt12">💡 把“无效”的案例也摆出来，比只给你看成功案例有用——你能看到别人是在哪一步翻车的。</view>
+  </view>
+</block>
+
+<!-- ============ P32 证据原文 ============ -->
+<block wx:if="{{page==='P32'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="row">
+        <view class="badge b1">国标</view>
+        <view class="badge b2">教材</view>
+        <view class="t3">· 2024 版</view>
+      </view>
+      <view class="t1 mt12">《水生动物疫病诊断规范》· 细菌性烂鳃病</view>
+      <view class="t3 mt8">来源：全国水产技术推广总站 · 2024 · 第 3.2 节</view>
+      <view class="divider"></view>
+      <view class="t2" style="background:#FAFAFA;padding:12px;border-radius:8px;font-size:13px;line-height:1.9;">
+        “病鱼鳃丝末端腐烂、缺损，附有污泥；鳃盖内表皮充血，严重时中间部分常被腐蚀成圆形或不规则的透明小窗……”
+      </view>
+      <view class="t3 mt12">适用品种：草鱼、青鱼、鳙、鲤 ｜ 适用水温：15–30℃</view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">这条依据支持了什么</view>
+      <view class="t2 mt8">✅ 支持“鳃丝腐烂 + 附泥”指向细菌性烂鳃</view>
+      <view class="t2 mt8">⚠️ 不支持的：本条没有区分细菌性与寄生虫性，所以模型无法据此排除寄生虫——这也是为什么置信度停在 62%。</view>
+    </view>
+    <view class="note-bar mt12">📌 每条结论都能点到具体条款。这是这套系统和“黑箱 AI”最本质的区别。</view>
+  </view>
+</block>
+
+<!-- ============ P40 方案页 ============ -->
+<block wx:if="{{page==='P40'}}">
+  <view class="disclaimer">⚕️ 以下为参考方案，须经执业兽医确认后使用</view>
+  <view style="background:#fff;display:flex;flex-direction:row;border-bottom:1px solid #E7E7E7;">
+    <view style="flex:1;text-align:center;padding:13px 0;font-size:14px;font-weight:600;color:#0E7C86;border-bottom:2px solid #0E7C86;">立即处理</view>
+    <view style="flex:1;text-align:center;padding:13px 0;font-size:14px;color:rgba(0,0,0,0.4);">观察 24h</view>
+    <view style="flex:1;text-align:center;padding:13px 0;font-size:14px;color:rgba(0,0,0,0.4);">采样送检</view>
+  </view>
+  <view class="pad">
+    <view class="card" style="padding:14px 16px;" bindtap="go" data-page="P42">
+      <view class="between"><view class="t1" style="font-size:15px;">用药合规检查</view><view class="t3">实时校核 ›</view></view>
+      <view class="light g">
+        <view class="bulb"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">氟苯尼考 · 可用</view>
+          <view class="t3 mt8">休药期 14 天 ｜ 草鱼 ｜ 按体重 10mg/kg</view>
+        </view>
+        <view class="tag success">绿</view>
+      </view>
+      <view class="light y">
+        <view class="bulb"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">甲砜霉素 · 谨慎</view>
+          <view class="t3 mt8">与氟苯尼考同类，不可叠加使用</view>
+        </view>
+        <view class="tag warning">黄</view>
+      </view>
+      <view class="light r">
+        <view class="bulb"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">氯霉素类 · 禁用</view>
+          <view class="t3 mt8">已列入农业农村部禁用清单（2026 版）</view>
+        </view>
+        <view class="tag error">红</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">算给你的用量</view><view class="tag gray">存塘 1800 斤</view></view>
+      <view class="dose mt12">
+        <view class="tr th"><view class="c1">项目</view><view class="c2">算法</view><view class="c3">结果</view></view>
+        <view class="tr"><view class="c1">水体体积</view><view class="c2">3 亩 × 2m</view><view class="c3">4000 m³</view></view>
+        <view class="tr"><view class="c1">外用消毒</view><view class="c2">0.3 mg/L</view><view class="c3">1.2 kg</view></view>
+        <view class="tr"><view class="c1">内服（5 天）</view><view class="c2">10 mg/kg 体重</view><view class="c3">90 g</view></view>
+        <view class="tr" style="border:none;"><view class="c1">每日拌饵</view><view class="c2">按 3% 投饵率</view><view class="c3">18 g</view></view>
+      </view>
+      <view class="t3 mt12">⚠️ 水温低于 18℃ 时按说明书减量，本塘 26℃ 无需调整</view>
+    </view>
+
+    <view class="card" style="background:linear-gradient(135deg,#0E7C86,#0A5F66);color:#fff;" bindtap="go" data-page="P43">
+      <view class="between">
+        <view>
+          <view style="font-size:12px;opacity:0.8;">末次给药 11-23 ＋ 休药期 14 天</view>
+          <view style="font-size:18px;font-weight:700;margin-top:6px;">12 月 7 日 可安全出塘</view>
+        </view>
+        <view style="text-align:right;">
+          <view style="font-size:30px;font-weight:800;line-height:1;">14</view>
+          <view style="font-size:11px;opacity:0.8;">天</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="mt12">
+      <view class="btn primary lg" bindtap="go" data-page="P50">确认方案并开始跟踪</view>
+      <view class="btn ghost" bindtap="go" data-page="P44">生成用药单（可打印/发渔医）</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P41 用药计算器 ============ -->
+<block wx:if="{{page==='P41'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="form-row"><view>水面面积</view><view>3.0 亩</view></view>
+      <view class="form-row"><view>平均水深</view><view>2.0 m</view></view>
+      <view class="form-row"><view>存塘重</view><view>1800 斤</view></view>
+      <view class="form-row last"><view>当前水温</view><view>26 ℃</view></view>
+    </view>
+    <view class="card mt12">
+      <view class="t1" style="font-size:14px;">计算结果</view>
+      <view class="kv"><view class="k">水体体积</view><view class="v">4000 m³</view></view>
+      <view class="kv"><view class="k">外用浓度</view><view class="v">0.3 mg/L</view></view>
+      <view class="kv"><view class="k">外用总量</view><view class="v" style="color:#0E7C86;font-size:16px;">1.2 kg</view></view>
+      <view class="kv"><view class="k">内服日剂量</view><view class="v">10 mg/kg 体重</view></view>
+      <view class="kv" style="border:none;"><view class="k">每日拌饵量</view><view class="v">18 g</view></view>
+    </view>
+    <view class="note-bar mt12">📐 公式：外用总量 = 水体体积 × 浓度 ÷ 1000；内服 = 存塘重 × 剂量 ÷ 日投饵率。水温修正按说明书系数表查。不在清单里的药，系统不给算——这是替你兜底。</view>
+  </view>
+</block>
+
+<!-- ============ P42 合规校验 ============ -->
+<block wx:if="{{page==='P42'}}">
+  <view class="pad">
+    <view class="card" style="padding:14px 16px;">
+      <view class="between"><view class="t1" style="font-size:15px;">三项校验 · 全部通过</view><view class="tag success">可执行</view></view>
+      <view class="light g">
+        <view class="bulb"></view>
+        <view class="grow"><view class="t1" style="font-size:14px;">禁用清单</view><view class="t3 mt8">与 2026 版禁用名录比对，未命中</view></view>
+        <view class="tag success">通过</view>
+      </view>
+      <view class="light g">
+        <view class="bulb"></view>
+        <view class="grow"><view class="t1" style="font-size:14px;">休药期</view><view class="t3 mt8">氟苯尼考 × 草鱼 = 14 天，已计入出塘日历</view></view>
+        <view class="tag success">通过</view>
+      </view>
+      <view class="light g">
+        <view class="bulb"></view>
+        <view class="grow"><view class="t1" style="font-size:14px;">配伍禁忌</view><view class="t3 mt8">方案内 2 种药无禁忌组合</view></view>
+        <view class="tag success">通过</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">数据来源与版本</view>
+      <view class="kv"><view class="k">禁用清单</view><view class="v">农业农村部 2026 版</view></view>
+      <view class="kv"><view class="k">生效日期</view><view class="v">2026-01-01</view></view>
+      <view class="kv"><view class="k">休药期表</view><view class="v">兽药典 2025 版</view></view>
+      <view class="kv" style="border:none;"><view class="k">最后更新</view><view class="v">2026-11-02</view></view>
+    </view>
+    <view class="note-bar mt12">🔒 清单版本是硬约束：如果系统用的版本已过期，会直接拒绝出方案，而不是“大概算一下”。算错一天休药期，可能就是整塘鱼卖不掉。</view>
+  </view>
+</block>
+
+<!-- ============ P43 出塘日历 ============ -->
+<block wx:if="{{page==='P43'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">2026 年 11 月</view><view class="t3">‹ ›</view></view>
+      <view class="cal mt12">
+        <view class="wd">一</view><view class="wd">二</view><view class="wd">三</view><view class="wd">四</view><view class="wd">五</view><view class="wd">六</view><view class="wd">日</view>
+        <view class="d dim">26</view><view class="d dim">27</view><view class="d dim">28</view><view class="d dim">29</view><view class="d dim">30</view><view class="d dim">31</view><view class="d">1</view>
+        <view class="d">2</view><view class="d">3</view><view class="d">4</view><view class="d">5</view><view class="d">6</view><view class="d">7</view><view class="d">8</view>
+        <view class="d">9</view><view class="d">10</view><view class="d">11</view><view class="d">12</view><view class="d">13</view><view class="d">14</view><view class="d">15</view>
+        <view class="d">16</view><view class="d">17</view><view class="d">18</view><view class="d">19</view><view class="d">20</view><view class="d">21</view><view class="d">22</view>
+        <view class="d mark">23</view><view class="d">24</view><view class="d">25</view><view class="d">26</view><view class="d">27</view><view class="d">28</view><view class="d">29</view>
+        <view class="d">30</view><view class="d ring2">7</view><view class="d dim">1</view><view class="d dim">2</view><view class="d dim">3</view><view class="d dim">4</view><view class="d dim">5</view>
+      </view>
+      <view class="legend" style="margin-top:14px;">
+        <view class="li">■ 今天（给药首日）</view>
+        <view class="li">□ 12/7 可出塘</view>
+      </view>
+    </view>
+    <view class="card" style="background:linear-gradient(135deg,#0E7C86,#0A5F66);color:#fff;">
+      <view class="between">
+        <view>
+          <view style="font-size:12px;opacity:0.8;">距离安全出塘</view>
+          <view style="font-size:26px;font-weight:800;margin-top:4px;">还有 14 天</view>
+        </view>
+        <view style="font-size:40px;opacity:0.3;">🗓️</view>
+      </view>
+    </view>
+    <view class="note-bar mt12">⚠️ 休药期内如确需出塘，系统会弹出强提醒并记录留痕。这不是拦你，是给你留个说法。</view>
+    <view class="mt12"><view class="btn secondary" bindtap="toast" data-msg="已设置提醒">设个提醒（提前 3 天）</view></view>
+  </view>
+</block>
+
+<!-- ============ P44 用药单 ============ -->
+<block wx:if="{{page==='P44'}}">
+  <view class="pad">
+    <view class="receipt">
+      <view class="h">塘口用药单</view>
+      <view class="sub">TANGKOU MEDICATION RECORD</view>
+      <view class="r"><view>塘口</view><view>东塘 3 号（3 亩 / 2m）</view></view>
+      <view class="r"><view>品种 / 存塘</view><view>草鱼 / 约 1800 斤</view></view>
+      <view class="r"><view>诊断</view><view>细菌性烂鳃病（82%）</view></view>
+      <view class="ln"></view>
+      <view class="r"><view>外用</view><view>消毒剂 1.2 kg，全池泼洒</view></view>
+      <view class="r"><view>内服</view><view>氟苯尼考 18 g/天 × 5 天</view></view>
+      <view class="r"><view>用法</view><view>拌饵投喂，每日 1 次</view></view>
+      <view class="ln"></view>
+      <view class="r"><view>首日给药</view><view>2026-11-23</view></view>
+      <view class="r"><view>休药期</view><view>14 天</view></view>
+      <view class="r"><view style="font-weight:700;">可安全出塘</view><view style="font-weight:700;">2026-12-07</view></view>
+      <view class="qr" style="margin:10px auto 6px;">二维码</view>
+      <view style="text-align:center;font-size:10px;color:#999;">扫码查看完整病例与回访记录</view>
+      <view class="foot">
+        本单为参考方案，不构成处方。用药须符合《兽药管理条例》及农业农村部相关规定，休药期内禁止上市销售。
+      </view>
+    </view>
+    <view class="mt12" style="display:flex;flex-direction:row;">
+      <view class="btn secondary" style="flex:1;margin-right:10px;" bindtap="toast" data-msg="已保存到相册">保存图片</view>
+      <view class="btn primary" style="flex:1;" bindtap="toast" data-msg="已复制给渔医">发给渔医</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P50 治疗跟踪 ============ -->
+<block wx:if="{{page==='P50'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">5 天疗程 · 第 2 天</view><view class="tag warning">进行中</view></view>
+      <view class="progress mt12"><view class="bar" style="width:40%;"></view></view>
+      <view class="between t3" style="margin-top:6px;"><view>11-23 开始</view><view>11-27 结束</view></view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">每天点一下</view>
+      <view class="cell">
+        <view class="thumb" style="background:#E8F8F2;">✓</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">11-23 第 1 天</view>
+          <view class="t3" style="margin-top:4px;">已用药 · 死鱼 30 条</view>
+        </view>
+        <view class="tag success">已记</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P60">
+        <view class="thumb" style="background:#FFF1E9;">●</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">11-24 第 2 天（今天）</view>
+          <view class="t3" style="margin-top:4px;">待记录死亡数</view>
+        </view>
+        <view class="tag warning">待填</view>
+      </view>
+      <view class="cell">
+        <view class="thumb" style="background:#F3F3F3;">3</view>
+        <view class="grow"><view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">11-25 第 3 天</view><view class="t3" style="margin-top:4px;">未到</view></view>
+      </view>
+      <view class="cell last">
+        <view class="thumb" style="background:#F3F3F3;">4</view>
+        <view class="grow"><view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">11-26 第 4 天</view><view class="t3" style="margin-top:4px;">未到</view></view>
+      </view>
+    </view>
+    <view class="card" style="border:1.5px solid #0E7C86;">
+      <view class="between"><view class="t1" style="font-size:15px;">今天的死鱼数</view><view class="t3">估个大概</view></view>
+      <view class="counter mt12" style="justify-content:center;">
+        <view class="btn2" bindtap="step" data-key="deadToday" data-d="-1">−</view>
+        <view class="val">{{deadToday}}</view>
+        <view class="btn2 plus" bindtap="step" data-key="deadToday" data-d="1">+</view>
+      </view>
+      <view class="btn primary mt16" bindtap="go" data-page="P60">提交今天</view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">死鱼数变化</view><view class="tag success">较首日 -60%</view></view>
+      <view class="bars mt12">
+        <view class="b" style="height:80%;"></view>
+        <view class="b" style="height:52%;"></view>
+        <view class="b" style="height:34%;"></view>
+        <view class="b" style="height:24%;"></view>
+        <view class="b last" style="height:18%;"></view>
+      </view>
+      <view class="barsx"><view class="x">首日 30</view><view class="x">D1</view><view class="x">D2 12</view><view class="x">D3</view><view class="x">D4</view></view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P60 回访 ============ -->
+<block wx:if="{{page==='P60'}}">
+  <view class="pad">
+    <view class="t1" style="font-size:19px;">今天死鱼大概多少条？</view>
+    <view class="t2 mt8">点一下就行，3 秒的事。你这一下，能让下一个塘主少走弯路。</view>
+    <view class="card mt16">
+      <view class="radio on" bindtap="pick" data-i="1">
+        <view class="circle"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:15px;color:#2BA471;">明显减少了</view>
+          <view class="t3">比用药前少一半以上</view>
+        </view>
+      </view>
+      <view class="radio" bindtap="pick" data-i="2">
+        <view class="circle"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:15px;">差不多</view>
+          <view class="t3">没明显变化</view>
+        </view>
+      </view>
+      <view class="radio" bindtap="pick" data-i="3">
+        <view class="circle"></view>
+        <view class="grow">
+          <view class="t1" style="font-size:15px;">更多了</view>
+          <view class="t3">死鱼数还在涨</view>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <view class="between">
+        <view>
+          <view class="t1" style="font-size:15px;">具体条数</view>
+          <view class="t3">估个大概就行</view>
+        </view>
+        <view class="counter">
+          <view class="btn2" bindtap="step" data-key="dead" data-d="-1">−</view>
+          <view class="val">{{dead}}</view>
+          <view class="btn2 plus" bindtap="step" data-key="dead" data-d="1">+</view>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <view class="row">
+        <view style="width:64px;height:64px;border-radius:8px;border:1px dashed #D5D5D5;text-align:center;line-height:64px;color:rgba(0,0,0,0.4);font-size:22px;margin-right:10px;">＋</view>
+        <view class="t3" style="flex:1;">有照片能判得更准，没有也不影响</view>
+      </view>
+    </view>
+    <view class="btn primary lg mt16" bindtap="go" data-page="P61">提交</view>
+    <view class="note-bar mt16">🎁 完成本次回访，送你 2 次免费诊断。你的数据会脱敏后进入病例库，帮助其他养殖户。</view>
+  </view>
+</block>
+
+<!-- ============ P61 疗效结论 ============ -->
+<block wx:if="{{page==='P61'}}">
+  <view class="pad">
+    <view class="card" style="text-align:center;padding:24px 16px;">
+      <view style="width:64px;height:64px;border-radius:32px;background:#E8F8F2;color:#2BA471;font-size:30px;line-height:64px;margin:0 auto;">✓</view>
+      <view class="t1" style="font-size:20px;margin-top:14px;color:#2BA471;">这个方案有效</view>
+      <view class="t2 mt8">日死亡数 30 → 8，降幅 73%</view>
+      <view class="mt12">
+        <view class="tag success">降幅 73%</view>
+        <view class="tag gray">已验证 1/2</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:15px;">死鱼数变化</view><view class="t3">11-23 → 11-26</view></view>
+      <view class="bars mt12">
+        <view class="b" style="height:92%;"></view>
+        <view class="b" style="height:66%;"></view>
+        <view class="b" style="height:38%;"></view>
+        <view class="b" style="height:28%;"></view>
+        <view class="b last" style="height:24%;"></view>
+      </view>
+      <view class="barsx"><view class="x">30</view><view class="x">20</view><view class="x">12</view><view class="x">9</view><view class="x">8</view></view>
+      <view class="between t3" style="margin-top:4px;"><view>首诊</view><view>今天</view></view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:15px;">诚实归因</view>
+      <view class="t2 mt8">期间有降温 4℃、且你换了一次水。部分好转可能来自环境变化，所以本次归因置信度：中。</view>
+      <view class="divider"></view>
+      <view class="t3">干扰项：降温 4℃、换水 30% ｜ 无新增其他用药</view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">这条病例已进入你的病历库</view>
+      <view class="t3 mt8">同类病例累计 12 例，9 例有效。你的贡献让这个数字更准了一点。</view>
+    </view>
+    <view class="btn secondary mt12" bindtap="go" data-page="P70">继续第 7 天回访</view>
+  </view>
+</block>
+
+<!-- ============ P70 我的病例 ============ -->
+<block wx:if="{{page==='P70'}}">
+  <view class="pad">
+    <view class="chips">
+      <view class="chip on">全部 8</view>
+      <view class="chip">待回访 2</view>
+      <view class="chip">已验证 4</view>
+      <view class="chip">无效 1</view>
+      <view class="chip">失访 1</view>
+    </view>
+    <view class="card mt12">
+      <view class="cell" bindtap="go" data-page="P71">
+        <view class="thumb">🐟</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">细菌性烂鳃病</view><view class="t3" style="margin-top:4px;">11-23 · 东塘 3 号</view></view>
+        <view class="tag warning">待回访</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P71">
+        <view class="thumb">🐟</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">细菌性烂鳃病</view><view class="t3" style="margin-top:4px;">11-20 · 东塘 3 号</view></view>
+        <view class="tag success">已验证</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">💧</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">水质突变应激</view><view class="t3" style="margin-top:4px;">11-02 · 西塘 1 号</view></view>
+        <view class="tag success">已验证</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">🐛</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">锚头鳋</view><view class="t3" style="margin-top:4px;">10-18 · 东塘 3 号</view></view>
+        <view class="tag success">已验证</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">🫁</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">鳃霉病</view><view class="t3" style="margin-top:4px;">10-05 · 西塘 1 号</view></view>
+        <view class="tag error">无效</view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">❓</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">证据不足</view><view class="t3" style="margin-top:4px;">09-28 · 东塘 3 号</view></view>
+        <view class="tag gray">失访</view>
+      </view>
+    </view>
+    <view class="note-bar mt12">📊 你的有效率 75%，高于本县平均 61%。这不是运气——是因为你每次都认真拍了照、也回填了结果。</view>
+  </view>
+</block>
+
+<!-- ============ P71 病例详情 ============ -->
+<block wx:if="{{page==='P71'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="between"><view class="t1">细菌性烂鳃病</view><view class="tag success">已验证</view></view>
+      <view class="t3 mt8">东塘 3 号 · 11-20 首诊 · 编号 C-2026-0417</view>
+      <view class="divider"></view>
+      <view class="kv"><view class="k">首诊日死亡</view><view class="v">30 条/天</view></view>
+      <view class="kv"><view class="k">D3 死亡</view><view class="v">12 条/天</view></view>
+      <view class="kv"><view class="k">D7 死亡</view><view class="v">8 条/天</view></view>
+      <view class="kv" style="border:none;"><view class="k">疗效判定</view><view class="v" style="color:#2BA471;">有效（降幅 73%）</view></view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">全程经过</view>
+      <view class="timeline mt16">
+        <view class="line"></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">11-20 拍照诊断</view><view class="t3">3 张图 · 检出鳃丝腐烂 · 置信度 82%</view></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">11-20 确定方案</view><view class="t3">外用消毒 + 内服 5 天 · 合规三项通过</view></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">11-23 第 3 天回访</view><view class="t3">30 → 12 条 · 标记“有效”</view></view>
+        <view class="tl done"><view class="dot"></view><view class="t1" style="font-size:14px;">11-27 第 7 天回访</view><view class="t3">12 → 8 条 · 升级为“已验证病例”</view></view>
+        <view class="tl" style="padding-bottom:0;"><view class="dot"></view><view class="t1" style="font-size:14px;color:rgba(0,0,0,0.4);">12-07 可安全出塘</view><view class="t3">休药期结束</view></view>
+      </view>
+    </view>
+    <view class="card" style="border:1px solid #0E7C86;">
+      <view class="t1" style="font-size:14px;color:#0E7C86;">这条病例已帮助 3 个相似塘口</view>
+      <view class="t3 mt8">它的方案被推荐给了 3 例条件相近的病例，其中 2 例有效。</view>
+    </view>
+    <view class="btn secondary mt12" bindtap="go" data-page="P80">导出完整报告</view>
+  </view>
+</block>
+
+<!-- ============ P80 报告 ============ -->
+<block wx:if="{{page==='P80'}}">
+  <view class="pad">
+    <view style="border-radius:14px;overflow:hidden;">
+      <view style="background:linear-gradient(135deg,#0E7C86,#0A5F66);color:#fff;padding:18px;">
+        <view style="font-size:11px;opacity:0.8;">塘口鱼医 · 诊断报告</view>
+        <view style="font-size:19px;font-weight:700;margin-top:6px;">东塘 3 号 · 细菌性烂鳃病</view>
+        <view style="font-size:11px;opacity:0.75;margin-top:6px;">11-20 诊断 ｜ 可信度 82% ｜ 依据：国标·诊断规范</view>
+      </view>
+      <view style="background:#fff;padding:16px;">
+        <view class="t3">病灶</view>
+        <view style="height:150px;border-radius:8px;background:linear-gradient(160deg,#CFE3E4,#A9C8CA);margin-top:8px;position:relative;">
+          <view style="position:absolute;left:38%;top:30%;width:24%;height:40%;border:2px solid #FF4D3F;border-radius:4px;"></view>
+        </view>
+        <view class="t3 mt12">方案</view>
+        <view class="t2 mt8" style="font-size:13px;">外用消毒 1 次（1.2kg）＋ 氟苯尼考内服 5 天（18g/天）</view>
+        <view class="t3 mt12">安全出塘</view>
+        <view class="t2 mt8" style="font-size:13px;font-weight:700;">2026-12-07</view>
+        <view class="divider"></view>
+        <view class="row" style="justify-content:space-between;">
+          <view class="t3" style="line-height:1.5;">扫码查看完整病例与回访记录</view>
+          <view class="qr" style="margin:0;">二维码</view>
+        </view>
+      </view>
+    </view>
+    <view class="mt16" style="display:flex;flex-direction:row;">
+      <view class="btn secondary" style="flex:1;margin-right:10px;" bindtap="toast" data-msg="已保存到相册">保存到相册</view>
+      <view class="btn primary" style="flex:1;" bindtap="toast" data-msg="已生成分享卡片">发到微信群</view>
+    </view>
+    <view class="note-bar mt12">💬 养殖户会把这张图转到群里，渔医和药店会拿它当背书——这是你最便宜的传播方式。</view>
+  </view>
+</block>
+
+<!-- ============ P90 病害图鉴 ============ -->
+<block wx:if="{{page==='P90'}}">
+  <view class="pad">
+    <view style="background:#fff;border-radius:20px;padding:10px 14px;">
+      <view class="t3">🔍 搜病名 / 症状 / 药名</view>
+    </view>
+    <view class="chips mt12">
+      <view class="chip on">草鱼</view><view class="chip">鲫</view><view class="chip">鲤</view><view class="chip">罗非</view><view class="chip">鲈</view>
+    </view>
+    <view class="chips">
+      <view class="chip on">全部</view><view class="chip">鳃</view><view class="chip">体表</view><view class="chip">内脏</view><view class="chip">寄生虫</view>
+    </view>
+    <view class="card mt12">
+      <view class="cell">
+        <view class="thumb">🦠</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">细菌性烂鳃病</view><view class="t3" style="margin-top:4px;">草鱼 · 青鱼 · 鳙 ｜ 高发 4–10 月</view></view>
+        <view class="tag error">高危害</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">🪱</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">寄生虫性烂鳃</view><view class="t3" style="margin-top:4px;">指环虫 · 三代虫 ｜ 需镜检</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">🍄</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">水霉病</view><view class="t3" style="margin-top:4px;">低水温期 · 体表棉絮状</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">💧</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">水质突变应激</view><view class="t3" style="margin-top:4px;">氨氮/亚硝酸盐/缺氧 ｜ 先查水</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">🐛</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">锚头鳋病</view><view class="t3" style="margin-top:4px;">体表针状虫体 · 鱼种期高发</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="t3 mt12" style="text-align:center;">图鉴内容来自国标、教材与院所公开图谱，每条标注来源</view>
+  </view>
+</block>
+
+<!-- ============ P91 药品查询 ============ -->
+<block wx:if="{{page==='P91'}}">
+  <view class="pad">
+    <view style="background:#fff;border-radius:20px;padding:10px 14px;">
+      <view class="t2" style="font-size:14px;">🔍 氟苯尼考</view>
+    </view>
+    <view class="card mt12">
+      <view class="between"><view class="t1">氟苯尼考</view><view class="tag success">可用</view></view>
+      <view class="t3 mt8">酰胺醇类抗生素 · 国标兽药</view>
+      <view class="divider"></view>
+      <view class="kv"><view class="k">适用品种</view><view class="v" style="font-weight:400;">草鱼、鲤、鲫、罗非等</view></view>
+      <view class="kv"><view class="k">休药期</view><view class="v">14 天（草鱼）</view></view>
+      <view class="kv"><view class="k">内服剂量</view><view class="v">10 mg/kg 体重</view></view>
+      <view class="kv" style="border:none;"><view class="k">配伍禁忌</view><view class="v" style="color:#E37318;">禁与甲砜霉素同用</view></view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1">氯霉素</view><view class="tag error">已禁用</view></view>
+      <view class="t3 mt8">列入农业农村部禁用清单（2026 版）</view>
+      <view class="note-bar mt12">🚫 禁用药品仍会显示——让你知道“这个不能碰”，比藏起来更有用。</view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1">甲砜霉素</view><view class="tag warning">谨慎</view></view>
+      <view class="t3 mt8">与氟苯尼考同类，切勿叠加使用</view>
+    </view>
+  </view>
+</block>
+
+<!-- ============ P92 计算器 ============ -->
+<block wx:if="{{page==='P92'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="form-row"><view>水面面积</view><view>3.0 亩</view></view>
+      <view class="form-row"><view>平均水深</view><view>2.0 m</view></view>
+      <view class="form-row"><view>放养尾数</view><view>4500</view></view>
+      <view class="form-row last"><view>平均规格</view><view>4 两/尾</view></view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">算出来</view>
+      <view class="kv"><view class="k">水体体积</view><view class="v">4,000 m³</view></view>
+      <view class="kv"><view class="k">估算存塘重</view><view class="v">1,800 斤</view></view>
+      <view class="kv"><view class="k">建议投饵率</view><view class="v">3%（54 斤/天）</view></view>
+      <view class="kv" style="border:none;"><view class="k">建议增氧功率</view><view class="v">≥ 4.5 kW</view></view>
+    </view>
+    <view class="note-bar mt12">📐 计算器是公开工具，不诊断也给你用——用得顺手的人，才会留下建档。</view>
+  </view>
+</block>
+
+<!-- ============ P93 区域热力图 ============ -->
+<block wx:if="{{page==='P93'}}">
+  <view class="pad">
+    <view class="card" style="padding:0;overflow:hidden;">
+      <view class="map">
+        <view style="position:absolute;left:60%;top:14%;width:120px;height:120px;border-radius:60px;background:rgba(213,73,65,0.18);"></view>
+        <view style="position:absolute;left:20%;top:48%;width:110px;height:110px;border-radius:55px;background:rgba(227,115,24,0.16);"></view>
+        <view style="position:absolute;left:64%;top:58%;width:90px;height:90px;border-radius:45px;background:rgba(43,164,113,0.16);"></view>
+        <view class="pin" style="left:62%;top:24%;">塘南镇 +37%</view>
+        <view class="pin" style="left:26%;top:62%;">向塘镇 +12%</view>
+        <view class="pin" style="left:66%;top:72%;">三江镇 −5%</view>
+      </view>
+      <view style="padding:12px 14px;">
+        <view class="legend">
+          <view class="li">● 上升</view>
+          <view class="li">● 持平</view>
+          <view class="li">● 下降</view>
+        </view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="between"><view class="t1" style="font-size:14px;">近 30 天 TOP 3</view><view class="t3">南昌县</view></view>
+      <view class="cell">
+        <view class="thumb">🦠</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">细菌性烂鳃</view><view class="t3" style="margin-top:4px;">42 例 · 环比 +37%</view></view>
+        <view class="tag error">↑</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">💧</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">缺氧浮头</view><view class="t3" style="margin-top:4px;">28 例 · 环比 +12%</view></view>
+        <view class="tag warning">↑</view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">🐛</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">锚头鳋</view><view class="t3" style="margin-top:4px;">11 例 · 环比 −5%</view></view>
+        <view class="tag success">↓</view>
+      </view>
+    </view>
+    <view class="note-bar mt12">🔒 最小样本 5 例才展示，只显示到乡镇级，且只给环比不给绝对数量。你贡献的数据已脱敏。</view>
+  </view>
+</block>
+
+<!-- ============ P95 渔医工作台 ============ -->
+<block wx:if="{{page==='P95'}}">
+  <view class="pad">
+    <view class="worknum">
+      <view class="n"><view class="b">6</view><view class="s">待回访</view></view>
+      <view class="n"><view class="b">2</view><view class="s">待复核</view></view>
+      <view class="n"><view class="b">18</view><view class="s">辖区病例</view></view>
+    </view>
+    <view class="card mt12">
+      <view class="between"><view class="t1" style="font-size:14px;">待你复核的方案</view><view class="t3">2</view></view>
+      <view class="cell" bindtap="go" data-page="P30">
+        <view class="thumb">🐟</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">东塘 3 号 · 细菌性烂鳃</view><view class="t3" style="margin-top:4px;">AI 置信度 82% · 等待复核</view></view>
+        <view class="tag warning">待办</view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">🐟</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">西塘 1 号 · 鳃霉病</view><view class="t3" style="margin-top:4px;">AI 置信度 61% · 用户已自行用药</view></view>
+        <view class="tag error">风险</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">待回访（可代填）</view>
+      <view class="cell">
+        <view class="thumb">⏰</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">陈师傅 · 东塘</view><view class="t3" style="margin-top:4px;">D3 未回填 · 已催 1 次</view></view>
+        <view class="tag error">超期</view>
+      </view>
+      <view class="cell">
+        <view class="thumb">⏰</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">李老板 · 5 号塘</view><view class="t3" style="margin-top:4px;">D7 未回填</view></view>
+      </view>
+      <view class="cell last">
+        <view class="thumb">⏰</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">王姐 · 北塘</view><view class="t3" style="margin-top:4px;">D3 未回填</view></view>
+        <view class="tag gray">今日</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="t1" style="font-size:14px;">辖区看板</view>
+      <view class="kv"><view class="k">本月病例</view><view class="v">18 例</view></view>
+      <view class="kv"><view class="k">有效率</view><view class="v" style="color:#2BA471;">72%</view></view>
+      <view class="kv" style="border:none;"><view class="k">最高发病种</view><view class="v">细菌性烂鳃（9 例）</view></view>
+    </view>
+    <view class="note-bar mt12">👨‍⚕️ 渔医端不是“另一个用户端”，而是把 AI 的首诊结果变成可复核、可代填的工作流——这是渠道能铺开的关键。</view>
+  </view>
+</block>
+
+<!-- ============ P99 我的 ============ -->
+<block wx:if="{{page==='P99'}}">
+  <view class="pad">
+    <view class="card">
+      <view class="row">
+        <view style="width:52px;height:52px;border-radius:26px;background:linear-gradient(135deg,#0E7C86,#0A5F66);color:#fff;text-align:center;line-height:52px;font-size:22px;margin-right:12px;">陈</view>
+        <view class="grow">
+          <view class="t1">陈师傅</view>
+          <view class="t3">养殖户 · 2 个塘口 · 8 份病例</view>
+        </view>
+        <view class="tag brand" bindtap="go" data-page="P95">切换角色</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="cell" bindtap="go" data-page="P90">
+        <view class="thumb">📚</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">病害图鉴</view><view class="t3" style="margin-top:4px;">按品种/部位/症状查</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P91">
+        <view class="thumb">💊</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">药品查询</view><view class="t3" style="margin-top:4px;">休药期 · 禁用状态</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell" bindtap="go" data-page="P92">
+        <view class="thumb">📐</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">塘口计算器</view><view class="t3" style="margin-top:4px;">存塘量/水体/用药量</view></view>
+        <view class="arrow">›</view>
+      </view>
+      <view class="cell last" bindtap="go" data-page="P93">
+        <view class="thumb">🗺️</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">本县病害动态</view><view class="t3" style="margin-top:4px;">区域热力图</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="cell last" bindtap="go" data-page="P95">
+        <view class="thumb">👨‍⚕️</view>
+        <view class="grow"><view class="t1" style="font-size:14px;">渔医工作台</view><view class="t3" style="margin-top:4px;">待回访 6 · 待复核 2</view></view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="card">
+      <view class="cell"><view class="thumb">🔔</view><view class="grow"><view class="t1" style="font-size:14px;">消息提醒</view></view><view class="arrow">›</view></view>
+      <view class="cell"><view class="thumb">📤</view><view class="grow"><view class="t1" style="font-size:14px;">导出我的数据</view></view><view class="arrow">›</view></view>
+      <view class="cell"><view class="thumb">🗑️</view><view class="grow"><view class="t1" style="font-size:14px;">注销账号</view></view><view class="arrow">›</view></view>
+      <view class="cell"><view class="thumb">📄</view><view class="grow"><view class="t1" style="font-size:14px;">免责声明与隐私</view></view><view class="arrow">›</view></view>
+      <view class="cell last"><view class="thumb">ℹ️</view><view class="grow"><view class="t1" style="font-size:14px;">关于</view><view class="t3" style="margin-top:4px;">v0.1.0 · 内部试用版</view></view></view>
+    </view>
+    <view class="card" bindtap="goMvvm">
+      <view class="row">
+        <view class="thumb">🏗️</view>
+        <view class="grow">
+          <view class="t1" style="font-size:14px;">MVVM 版首页（参考实现）</view>
+          <view class="t3" style="margin-top:4px;">数据绑定 + 组件化 + Service 层</view>
+        </view>
+        <view class="arrow">›</view>
+      </view>
+    </view>
+    <view class="t3 mt16" style="text-align:center;line-height:1.8;">
+      本产品提供参考信息，不构成诊断结论或处方。用药须经执业兽医确认。
+    </view>
+  </view>
+</block>
+
+<view class="tabspace" wx:if="{{tab>=0}}"></view>
+<view class="tabbar" wx:if="{{tab>=0}}">
+  <view class="tab {{tab===0?'on':''}}" bindtap="go" data-page="P01"><view class="dot"></view>首页</view>
+  <view class="tab {{tab===1?'on':''}}" bindtap="go" data-page="P10"><view class="dot"></view>诊断</view>
+  <view class="tab {{tab===2?'on':''}}" bindtap="go" data-page="P70"><view class="dot"></view>病例</view>
+  <view class="tab {{tab===3?'on':''}}" bindtap="go" data-page="P99"><view class="dot"></view>我的</view>
+</view>
+
+</view>
